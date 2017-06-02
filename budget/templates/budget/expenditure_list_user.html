@@ -1,0 +1,19 @@
+{% extends "budget/base_site_generic.html" %}
+
+{% block content %}
+
+    <h1></h1>
+
+    {% if expenditure_list %}
+        <ul>
+            {% for expenditure in expenditure_list %}
+            <li>
+                {{ expenditure.name }} - {{ expenditure.amount_spent }} - {{ expenditure.date_spent }}
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't added any expenditures.</p>
+    {% endif %}
+
+{% endblock %}
