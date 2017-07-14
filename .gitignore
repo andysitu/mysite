@@ -49,3 +49,6 @@ Temporary Items
 .idea
 
 *.pyc
+
+django_login_file.py
+**/migrations
