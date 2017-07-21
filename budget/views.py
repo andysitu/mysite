@@ -13,9 +13,6 @@ def index(request):
         'budget/index.html',
     )
 
-def test(request):
-    return HttpResponse("HI")
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from .models import Expenditure

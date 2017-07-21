@@ -22,5 +22,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'budget/', include('budget.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^$', views.index, name="index")
+    url(r'^$', views.index, name="index"),
+]
+
+urlpatterns += [
+    url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
