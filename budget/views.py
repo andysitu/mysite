@@ -27,6 +27,3 @@ class ExpendituresByUserListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Expenditure.objects.filter(user=self.request.user).order_by('amount_spent')
-
-class Expenditure(LoginRequiredMixin, generic.DetailView):
-    model = Expenditure
