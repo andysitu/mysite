@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.shortcuts import redirect
 
 from . import views
 
@@ -23,6 +24,7 @@ urlpatterns = [
     url(r'budget/', include('budget.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^$', views.index, name="index"),
+    url(r'^index/$', views.index,)
 ]
 
 urlpatterns += [
