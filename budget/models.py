@@ -12,7 +12,8 @@ class Expenditure(models.Model):
         return str(self.amount_spent)
 
 class Income(models.Model):
-    income = models.FloatField(default=0.00)
+    name = models.CharField(max_length=50, default='')
+    amount = models.FloatField(default=0.00)
     date = models.DateTimeField('date money was earned')
 
     def __str__(self):
