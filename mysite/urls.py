@@ -19,6 +19,7 @@ from django.shortcuts import redirect
 
 from . import views
 
+app_name = "mysite"
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'budget/', include('budget.urls')),
