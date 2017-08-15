@@ -4,6 +4,23 @@ import datetime
 # Create your views here.
 from django.http import HttpResponse
 
+def view_day(request, year=None, month=None, day=None):
+    if year == None and month == None and day == None:
+        d = datetime.date.today()
+        year = d.year
+        month = d.strftime("%B")
+        day = d.day
+    return render(
+        request,
+        'budget/view_day.html',
+        context = {
+            "year": year,
+            "month": month,
+            "day": day,
+        }
+    )
+
+
 def index(request):
     todays_date = datetime.date.today()
 
