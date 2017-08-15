@@ -1,8 +1,17 @@
 {% extends "budget/budget_base_generic.html" %}
 
 {% block content %}
+
+<p><span class="glyphicon glyphicon-off"></span></p>
 <div class="text-center">
     <h1>{{month}} {{day}}, {{year}}</h1>
+    <button type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+</button>
+
 </div>
 
 {% endblock %}

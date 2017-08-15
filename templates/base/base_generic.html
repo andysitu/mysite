@@ -14,18 +14,18 @@
     {% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="{% url 'index' %}">A</a>
             </div>
 
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse justify-content-end">
 
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav align-right">
                     {% if user.is_authenticated %}
 
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'logout' %}">Logout (User: {{user.get_username}})</a></li>
 
                     {% else %}
 
@@ -33,12 +33,9 @@
 
                     {% endif %}
 
-
                 </ul>
 
-                {% if user.is_authenticated %}
-                <p class="navbar-text navbar-right">User: {{user.get_username }}</p>
-                {% endif %}
+
             </div>
         </div>
     </nav>
