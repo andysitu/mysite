@@ -1,25 +1,40 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import datetime
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 def view_day(request, year=None, month=None, day=None):
     if year == None and month == None and day == None:
         d = datetime.date.today()
-        year = d.year
-        month = d.strftime("%B")
-        day = d.day
+
+    else:
+        d = datetime.date(int(year), int(month), int(day))
+    d_year = d.year
+    d_month = d.month
+    d_monthstr = d.strftime("%B")
+    d_day = d.day
     return render(
         request,
         'budget/view_day.html',
         context = {
-            "year": year,
-            "month": month,
-            "day": day,
+            "year": d_year,
+            "month": d_month,
+            'month_str': d_monthstr,
+            "day": d_day,
         }
     )
 
+def view_prev_day(request, year, month, day):
+    d = datetime.date(int(year), int(month), int(day))
+    new_day = d + datetime.timedelta(days=-1)
+    return redirect("budget:view_day", year=new_day.year, month=new_day.month, day=new_day.day)
+
+
+def view_next_day(request, year, month, day):
+    d = datetime.date(int(year), int(month), int(day))
+    new_day = d + datetime.timedelta(days=1)
+    return redirect("budget:view_day", year=new_day.year, month=new_day.month, day=new_day.day)
 
 def index(request):
     todays_date = datetime.date.today()
