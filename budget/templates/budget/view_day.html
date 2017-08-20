@@ -1,19 +1,34 @@
 {% extends "budget/budget_base_generic.html" %}
 
 {% block content %}
+    <div class="container">
 
-    <p><span class="glyphicon glyphicon-off"></span></p>
+        <p><span class="glyphicon glyphicon-off"></span></p>
 
-    <div class="text-center">
-        <a href="{% url 'budget:view_prev_day' year month day %}">
-            <i class="fa fa-angle-left" aria-hidden="true"></i>
+        <div class="text-center">
+            <a href="{% url 'budget:view_prev_day' year month day %}">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </a>
+            {{month_str}} {{day}}, {{year}}
+            <a href="{% url 'budget:view_next_day' year month day %}">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+
+
+        </div>
+
+        <a class="btn btn-primary" data-toggle="collapse" href="#tester" aria-expanded="false" aria-controls="tester">
+            <i class="fa fa-plus" aria-hidden="true"></i>
         </a>
-        {{month_str}} {{day}}, {{year}}
-        <a href="{% url 'budget:view_next_day' year month day %}">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-    </button>
+        <div class="collapse.show" id="tester">
+            <div class="card card-body">
+                Hello, today was a day.
+            </div>
+        </div>
 
     </div>
+
+
+
 
 {% endblock %}
