@@ -16,39 +16,41 @@
     {% endblock %}
 </head>
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'index' %}">A</a>
-            </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block js %}{% endblock %}
+</body>
+    <div class="collapse" id="side-menu">
+        <div class="bg-dark p-4">
+            Hello
+        </div>
+    </div>
 
-            <div class="navbar-collapse collapse justify-content-end">
+    {% block menuscreen %}{% endblock %}
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#side-menu" aria-controls="side-menu" aria-expanded="false" aria-label="Toggle side menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'index' %}">A</a>
+        </div>
 
-                <ul class="nav navbar-nav align-right">
-                    {% if user.is_authenticated %}
+        <div class="navbar-collapse collapse justify-content-end">
+            <ul class="nav navbar-nav align-right">
+                {% if user.is_authenticated %}
 
-                    <li><a href="{% url 'logout' %}">Logout (User: {{user.get_username}})</a></li>
+                <li><a href="{% url 'logout' %}">Logout (User: {{user.get_username}})</a></li>
 
-                    {% else %}
+                {% else %}
 
-                     <li><a href="{% url 'login' %}">Login</a></li>
+                 <li><a href="{% url 'login' %}">Login</a></li>
 
-                    {% endif %}
+                {% endif %}
 
-                </ul>
-
-
-            </div>
+            </ul>
         </div>
     </nav>
 
     {% block content %}{% endblock %}
-
-    {% block js %}
-        <script src="{% static 'js/jquery.min.js' %}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    {% endblock %}
-</body>
-
 </html>
