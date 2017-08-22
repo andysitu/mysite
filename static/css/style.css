@@ -1,11 +1,7 @@
-/*.sidebar-nav {*/
-    /*margin-top: 20px;*/
-    /*padding: 0;*/
-    /*list-style: none;*/
-/*}*/
-
-body { padding-top: 70px; }
-
-.navbar-nav > li {
-    list-style-type: none;
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
 }
+
+body { padding-top: 50px; }

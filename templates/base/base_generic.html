@@ -29,12 +29,11 @@
 
     {% block menuscreen %}{% endblock %}
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#side-menu" aria-controls="side-menu" aria-expanded="false" aria-label="Toggle side menu">
+        <a class="navbar-brand" href="{% url 'index' %}">A</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#side-menu" aria-controls="side-menu" aria-expanded="false" aria-label="Toggle side menu">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'index' %}">A</a>
-        </div>
+
 
         <div class="navbar-collapse collapse justify-content-end">
             <ul class="nav navbar-nav align-right">
