@@ -22,15 +22,20 @@
     {% block js %}{% endblock %}
 </body>
     {% block menuscreen %}{% endblock %}
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url 'index' %}">A</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#side-menu" aria-controls="side-menu" aria-expanded="false" aria-label="Toggle side menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
+        <a class="navbar-brand" href="{% url 'index' %}">A</a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                Home
+            </li>
+        </ul>
 
         <div class="navbar-collapse collapse justify-content-end">
             <ul class="nav navbar-nav align-right">
+                <button class="navbar-toggler" type="button" id="navbarSideButton">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
                 {% if user.is_authenticated %}
 
                 <li><a href="{% url 'logout' %}">Logout (User: {{user.get_username}})</a></li>
@@ -40,6 +45,8 @@
                  <li><a href="{% url 'login' %}">Login</a></li>
 
                 {% endif %}
+
+
             </ul>
         </div>
     </nav>
