@@ -22,37 +22,27 @@
     {% block js %}{% endblock %}
 </body>
     {% block menuscreen %}{% endblock %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+    <nav class="navbar navbar-light bg-light" role="navigation">
         <a class="navbar-brand" href="{% url 'index' %}">A</a>
         <ul class="nav navbar-nav">
             <li class="nav-item">
-                Home
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
 
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a href="{% url 'logout' %}">Logout (User: {{user.get_username}})</a>
+            </li>
+            {% else %}
+             <li class="nav-item">
+                 <a href="{% url 'login' %}">Login</a>
+             </li>
+            {% endif %}
+
             <button class="navbar-toggler pull-xs-right" id="navbarSideButton" type="button">
-                &#9776;
+                <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
         </ul>
-
-        <div class="navbar-collapse collapse justify-content-end">
-            <ul class="nav navbar-nav align-right">
-                <button class="navbar-toggler" type="button" id="navbarSideButton">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                {% if user.is_authenticated %}
-
-                <li><a href="{% url 'logout' %}">Logout (User: {{user.get_username}})</a></li>
-
-                {% else %}
-
-                 <li><a href="{% url 'login' %}">Login</a></li>
-
-                {% endif %}
-
-
-            </ul>
-        </div>
     </nav>
-
     {% block content %}{% endblock %}
 </html>
