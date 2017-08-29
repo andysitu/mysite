@@ -15,27 +15,31 @@
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     {% endblock %}
 </head>
+
 <body>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/base_generic.js' %}"></script>
+
     {% block js %}{% endblock %}
-</body>
+
     {% block menuscreen %}{% endblock %}
     <nav class="navbar navbar-light bg-light" role="navigation">
         <a class="navbar-brand" href="{% url 'index' %}">A</a>
-        <ul class="nav navbar-nav">
+        <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
 
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a href="{% url 'logout' %}">Logout (User: {{user.get_username}})</a>
+                <a class="nav-link" href="{% url 'logout' %}">Logout (User: {{user.get_username}})</a>
             </li>
             {% else %}
              <li class="nav-item">
-                 <a href="{% url 'login' %}">Login</a>
+                 <a class="nav-link" href="{% url 'login' %}">Login</a>
              </li>
             {% endif %}
 
@@ -43,6 +47,15 @@
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
         </ul>
+
+        <ul class="navbar-side" id="navbarSide">
+            <li class="navbar-side-item">
+                <a href="#" class="side-link">Signup</a>
+            </li>
+        </ul>
+        <div class="overlay"></div>
     </nav>
     {% block content %}{% endblock %}
+</body>
+
 </html>
