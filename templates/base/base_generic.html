@@ -25,37 +25,8 @@
 
     {% block js %}{% endblock %}
 
-    {% block menuscreen %}{% endblock %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
-        <a class="navbar-brand" href="{% url 'index' %}">A</a>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Home</a>
-            </li>
+    {% block body %}{% endblock %}
 
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout (User: {{user.get_username}})</a>
-            </li>
-            {% else %}
-             <li class="nav-item">
-                 <a class="nav-link" href="{% url 'login' %}">Login</a>
-             </li>
-            {% endif %}
-
-            <button class="navbar-toggler pull-xs-right" id="navbarSideButton" type="button">
-                <i class="fa fa-bars" aria-hidden="true"></i>
-            </button>
-        </ul>
-
-        <ul class="navbar-side" id="navbarSide">
-            <li class="navbar-side-item">
-                <a href="#" class="side-link">Signup</a>
-            </li>
-        </ul>
-        <div class="overlay"></div>
-    </nav>
-    {% block content %}{% endblock %}
 </body>
 
 </html>
