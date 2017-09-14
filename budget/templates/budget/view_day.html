@@ -2,7 +2,6 @@
 
 {% block content %}
     <div class="container">
-
         <p><span class="glyphicon glyphicon-off"></span></p>
 
         <div class="text-center">
@@ -14,6 +13,8 @@
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
             </a>
         </div>
+        <a class="btn btn-default" href="{% url 'budget:add' %}">
+            <i class="fa fa-plus" aria-hidden="true"></i> Add</a>
     </div>
 
 {% endblock %}

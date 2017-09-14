@@ -1,0 +1,25 @@
+{% extends "budget/budget_base_generic.html" %}
+
+{% load static %}
+
+{% block js %}
+<script src="{% static 'budget/js/add.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-11">
+            <form>
+                <div class="form-group">
+                    <label for="add-type-select">Add Type</label>
+                    <select class="form-control col-sm-2" id="add-type-select">
+                        <option>Income</option>
+                        <option>Expenditure</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

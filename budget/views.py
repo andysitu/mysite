@@ -45,6 +45,12 @@ def index(request):
         'budget/index.html',
     )
 
+def add(request):
+    return render(
+        request,
+        'budget/add.html'
+    )
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from .models import Expenditure
