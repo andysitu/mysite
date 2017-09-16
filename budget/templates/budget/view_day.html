@@ -9,20 +9,34 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <p><span class="glyphicon glyphicon-off"></span></p>
+<link rel="stylesheet" type="text/css" href="{% static 'budget/css/view_day.css' %}" />
 
-        <div class="text-center">
-            <a href="{% url 'budget:view_prev_day' year month day %}">
-                <i class="fa fa-angle-left" aria-hidden="true"></i>
-            </a>
-            {{month_str}} {{day}}, {{year}}
-            <a href="{% url 'budget:view_next_day' year month day %}">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-            </a>
-        </div>
-        <a class="btn btn-default" href="{% url 'budget:add' %}">
-            <i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+<div class="container">
+    <p><span class="glyphicon glyphicon-off"></span></p>
+
+    <div class="text-center">
+        <a href="{% url 'budget:view_prev_day' year month day %}">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </a>
+        {{month_str}} {{day}}, {{year}}
+        <a href="{% url 'budget:view_next_day' year month day %}">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
     </div>
+    <button class="btn btn-default" id="add-button">
+        <i class="fa fa-plus" aria-hidden="true"></i> Add</button>
+</div>
+
+<div class="center-block menu-option" id="menu-option-div">
+    <form>
+        <div class="form-group">
+            <label for="add-type-select">Type</label>
+            <select class="form-control col-sm-2" id="add-type-select">
+                <option>Income</option>
+                <option>Expenditure</option>
+            </select>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

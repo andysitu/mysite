@@ -1,0 +1,12 @@
+.menu-option {
+    height: 60%;
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f7f7f9;
+    z-index: 1050;
+    border: 2px solid #ccc;
+    display: none;
+}
