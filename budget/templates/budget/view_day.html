@@ -1,5 +1,13 @@
 {% extends "budget/budget_base_generic.html" %}
 
+{% load static %}
+
+{% block js %}
+
+<script type="text/javascript" src="{% static 'budget/js/view_day.js' %}"></script>
+
+{% endblock %}
+
 {% block content %}
     <div class="container">
         <p><span class="glyphicon glyphicon-off"></span></p>

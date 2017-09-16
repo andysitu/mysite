@@ -1,9 +1,7 @@
 {% extends "budget/budget_base_generic.html" %}
 
 {% block content %}
-
     <h1></h1>
-
     {% if expenditure_list %}
         <ul>
             {% for expenditure in expenditure_list %}
@@ -15,5 +13,4 @@
     {% else %}
         <p>You haven't added any expenditures.</p>
     {% endif %}
-
 {% endblock %}
