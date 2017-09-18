@@ -15,6 +15,7 @@ $( document ).ready(function() {
     //JS for pressing Add button
     $('#add-button').click(function(){
         $('.overlay').show();
+        menu_screen.create_menu()
         $( '#menu-option-div' ).show();
     });
 });
