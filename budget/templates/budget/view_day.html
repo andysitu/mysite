@@ -3,10 +3,8 @@
 {% load static %}
 
 {% block js %}
-
-<script type="text/javascript" src="{% static 'budget/js/view_day.js' %}"></script>
 <script type="text/javascript" src="{% static 'budget/js/menu_screen.js' %}"></script>
-
+<script type="text/javascript" src="{% static 'budget/js/view_day.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -28,18 +26,6 @@
         <i class="fa fa-plus" aria-hidden="true"></i> Add</button>
 </div>
 
-<div class="center-block menu-option" id="menu-option-div">
-    <form>
-        <div class="form-group">
-            <label for="menu-type-select">Type</label>
-            <select class="form-control col-sm-2" id="menu-type-select">
-                <option>Income</option>
-                <option>Expenditure</option>
-            </select>
-        </div>
-    </form>
-
-    <form id="created_menu_form"></form>
-</div>
+<div class="center-block menu-option" id="menu-option-div"></div>
 
 {% endblock %}

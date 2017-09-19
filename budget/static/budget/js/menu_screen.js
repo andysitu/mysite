@@ -1,11 +1,26 @@
 var menu_screen = {
-    create_menu: function () {
+    create_add_menu: function () {
 
-        var menu_form = $('#created_menu_form'),
-        // this is the form where the html is to be added to
-            menu_select = $('#menu-type-select'),
-            menu_type = menu_select.val();
+        var $menu_option_div = $( '#menu-option-div' );
 
-        console.log(menu_type);
+        var $form = $("<form></form>"),
+            $addType_div = $("<div class='form-group'></div>");
+
+        $addType_div.appendTo($form);
+
+        $("<label for='add-type-select'>Type</label>").appendTo($addType_div);
+        var $addType_select = $("<select>", {
+            "class": "form-control",
+            id: "add-type-select",})
+                .addClass("col-sm-2")
+                .appendTo($addType_div);
+
+        $addType_select.append( $("<option>Income</option>"));
+        $addType_select.append( $("<option>Expenditure</option>"));
+
+        console.log($form);
+        $menu_option_div.append($form);
     },
+
+
 };
