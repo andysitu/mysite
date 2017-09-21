@@ -1,4 +1,13 @@
 var menu_screen = {
+    create_menu: function(type) {
+        this.clear_menu();
+
+        switch(type) {
+            case "add":
+                this.create_add_menu();
+                break;
+        }
+    },
     create_add_menu: function () {
 
         var $menu_option_div = $( '#menu-option-div' );
@@ -18,9 +27,10 @@ var menu_screen = {
         $addType_select.append( $("<option>Income</option>"));
         $addType_select.append( $("<option>Expenditure</option>"));
 
-        console.log($form);
         $menu_option_div.append($form);
     },
 
-
+    clear_menu: function() {
+        $menu_option_div = $( '#menu-option-div' ).empty();
+    }
 };

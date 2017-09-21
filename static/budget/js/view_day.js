@@ -16,6 +16,6 @@ $( document ).ready(function() {
     $('#add-button').click(function(){
         $('.overlay').show();
         $( '#menu-option-div' ).show();
-        menu_screen.create_add_menu()
+        menu_screen.create_menu("add");
     });
 });
