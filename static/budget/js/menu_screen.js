@@ -65,14 +65,21 @@ var add_type_menu = {
     add_income: function() {
         var $menu_screen = $('#menu-screen');
 
-        var $date_div = $("<div class='form-group'></div>")
-            .appendTo($menu_screen);
-        $("<label for='add-date-input'>Date</label>")
-            .appendTo($date_div);
-        $("<input id='add-date-input' type='date' class='form-control'>")
-            .appendTo($date_div);
+        $date_select_div = this.make_$date_select_div();
+        $menu_screen.append($date_select_div);
     },
     add_expenditure: function() {
-        var menu_screen = $('#menu-screen');
+        var $menu_screen = $('#menu-screen');
+
+        $date_select_div = this.make_$date_select_div();
+        $menu_screen.append($date_select_div);
     },
+    make_$date_select_div: function() {
+        var $date_div = $("<div class='form-group row'></div>")
+        $("<label for='add-date-input' class='col-sm-2 col-form-label'>Date</label>")
+            .appendTo($date_div);
+        $("<input id='add-date-input' type='date' class='col-sm-4 form-control'>")
+            .appendTo($date_div);
+        return $date_div;
+    }
 }
