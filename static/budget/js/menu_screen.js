@@ -13,11 +13,11 @@ var menu_screen = {
         var $menu_option_div = $( '#menu-option-div' );
 
         var $form = $("<form></form>"),
-            $addType_div = $("<div class='form-group'></div>");
+            $addType_div = $("<div class='form-group row'></div>");
 
         $addType_div.appendTo($form);
 
-        $("<label for='add-type-select'>Type</label>").appendTo($addType_div);
+        $("<label for='add-type-select' class='col-sm-1 col-form-label'>Type</label>").appendTo($addType_div);
         var $addType_select = $("<select>", {
             "class": "form-control",
             id: "add-type-select",})
@@ -76,9 +76,9 @@ var add_type_menu = {
     },
     make_$date_select_div: function() {
         var $date_div = $("<div class='form-group row'></div>")
-        $("<label for='add-date-input' class='col-sm-2 col-form-label'>Date</label>")
+        $("<label for='add-date-input' class='col-sm-1 col-form-label'>Date</label>")
             .appendTo($date_div);
-        $("<input id='add-date-input' type='date' class='col-sm-4 form-control'>")
+        $("<input id='add-date-input' type='date' class='col-sm-3 form-control'>")
             .appendTo($date_div);
         return $date_div;
     }
