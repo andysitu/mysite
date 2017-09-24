@@ -34,6 +34,7 @@ var menu_screen = {
 
         // Get add type & then add corresponding menu
         add_type_menu.add_menuOption();
+        $addType_select.change(add_type_menu.add_menuOption.bind(add_type_menu));
     },
     clear_all_menu: function() {
         $menu_option_div = $( '#menu-option-div' ).empty();
