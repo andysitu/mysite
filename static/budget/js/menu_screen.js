@@ -65,21 +65,43 @@ var add_type_menu = {
     add_income: function() {
         var $menu_screen = $('#menu-screen');
 
-        $date_select_div = this.make_$date_select_div();
+        var $date_select_div = this.make_$date_select_div();
         $menu_screen.append($date_select_div);
+
+        $menu_screen.append(this.make_$amount_input_div);
     },
     add_expenditure: function() {
         var $menu_screen = $('#menu-screen');
 
-        $date_select_div = this.make_$date_select_div();
+        var $date_select_div = this.make_$date_select_div();
         $menu_screen.append($date_select_div);
+
+        $menu_screen.append(this.make_$amount_input_div);
+
     },
     make_$date_select_div: function() {
         var $date_div = $("<div class='form-group row'></div>")
         $("<label for='add-date-input' class='col-sm-1 col-form-label'>Date</label>")
             .appendTo($date_div);
-        $("<input id='add-date-input' type='date' class='col-sm-3 form-control'>")
+        var $date_select = $("<input id='add-date-input' type='date' class='col-sm-3 form-control'>")
             .appendTo($date_div);
+
+        // Set Default date to today
+        $date_select[0].valueAsDate = new Date();
+
         return $date_div;
-    }
+    },
+    make_$amount_input_div: function() {
+        var $amount_div = $("<div class='form-group row'></div>");
+
+        $("<label for='add-amount-input' class='col-sm-1 col-form-label'>Amount</label>")
+            .appendTo($amount_div);
+
+        $("<span class='input-group-addon'>$</span>")
+            .appendTo($amount_div);
+        $("<input id='add-amount-input' type='number' class='col-sm-3 form-control'>")
+            .appendTo($amount_div);
+
+        return $amount_div;
+    },
 }
