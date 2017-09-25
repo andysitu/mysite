@@ -68,7 +68,9 @@ var add_type_menu = {
         var $date_select_div = this.make_$date_select_div();
         $menu_screen.append($date_select_div);
 
-        $menu_screen.append(this.make_$amount_input_div);
+        $menu_screen.append(this.make_$amount_input_div());
+
+        $menu_screen.append(this.make_$time_period_div());
     },
     add_expenditure: function() {
         var $menu_screen = $('#menu-screen');
@@ -76,9 +78,12 @@ var add_type_menu = {
         var $date_select_div = this.make_$date_select_div();
         $menu_screen.append($date_select_div);
 
-        $menu_screen.append(this.make_$amount_input_div);
+        $menu_screen.append(this.make_$amount_input_div());
 
+        $menu_screen.append(this.make_$time_period_div());
     },
+
+
     make_$date_select_div: function() {
         var $date_div = $("<div class='form-group row'></div>")
         $("<label for='add-date-input' class='col-sm-1 col-form-label'>Date</label>")
@@ -103,5 +108,22 @@ var add_type_menu = {
             .appendTo($amount_div);
 
         return $amount_div;
+    },
+    make_$time_period_div: function() {
+        var $time_period_div = $("<div class='form-row align-items-center'></div>");
+
+        $("<label for='time-period-input' class='col-sm-1 col-form-label'>Time Period</label>")
+            .appendTo($time_period_div);
+        $("<input id='time-period-input' type='number' class='col-sm-1 form-control'>")
+            .appendTo($time_period_div);
+
+        var $timePer_option = $("<select id='time-period-option' class='custom-select'></select>")
+            .appendTo($time_period_div);
+        $("<option>Days</option>").appendTo($timePer_option);
+        $("<option>Weeks</option>").appendTo($timePer_option);
+        $("<option>Months</option>").appendTo($timePer_option);
+        $("<option>Years</option>").appendTo($timePer_option);
+
+        return $time_period_div;
     },
 }
