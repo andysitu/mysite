@@ -39,6 +39,11 @@ var menu_screen = {
     clear_all_menu: function() {
         $menu_option_div = $( '#menu-option-div' ).empty();
     },
+    close_menu: function() {
+        $('#navbarSide').removeClass('reveal');
+        $( '#menu-option-div' ).hide();
+        $('.overlay').hide()
+    },
 };
 
 var add_type_menu = {
@@ -71,6 +76,10 @@ var add_type_menu = {
         $menu_screen.append(this.make_$amount_input_div());
 
         $menu_screen.append(this.make_$time_period_div());
+
+        $menu_screen.append($("<button type='submit' class='btn btn-primary'>Submit</button>"));
+
+        $menu_screen.append(this.make_$close_btn());
     },
     add_expenditure: function() {
         var $menu_screen = $('#menu-screen');
@@ -81,6 +90,10 @@ var add_type_menu = {
         $menu_screen.append(this.make_$amount_input_div());
 
         $menu_screen.append(this.make_$time_period_div());
+
+        $menu_screen.append($("<button type='submit' class='btn btn-primary'>Submit</button>"));
+
+        $menu_screen.append(this.make_$close_btn());
     },
 
 
@@ -125,5 +138,12 @@ var add_type_menu = {
         $("<option>Years</option>").appendTo($timePer_option);
 
         return $time_period_div;
+    },
+    make_$close_btn: function() {
+        var $but = $("<button class='btn'>Close</button>");
+        $but.click(function(){
+            menu_screen.close_menu();
+        });
+        return $but;
     },
 }
