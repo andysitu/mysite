@@ -58,17 +58,21 @@ var add_type_menu = {
         // this.make(type);
     },
     make_menuOption: function(type) {
+        var $menu_screen = $('#menu-screen');
+
         switch(type) {
             case "Income":
-                this.add_income();
+                this.add_income($menu_screen);
                 break;
             case "Expenditure":
-                this.add_expenditure();
+                this.add_expenditure($menu_screen);
                 break;
         }
+        $menu_screen.append($("<button type='submit' class='btn btn-primary'>Submit</button>"));
+
+        $menu_screen.append(this.make_$close_btn());
     },
-    add_income: function() {
-        var $menu_screen = $('#menu-screen');
+    add_income: function($menu_screen) {
 
         var $date_select_div = this.make_$date_select_div();
         $menu_screen.append($date_select_div);
@@ -76,13 +80,8 @@ var add_type_menu = {
         $menu_screen.append(this.make_$amount_input_div());
 
         $menu_screen.append(this.make_$time_period_div());
-
-        $menu_screen.append($("<button type='submit' class='btn btn-primary'>Submit</button>"));
-
-        $menu_screen.append(this.make_$close_btn());
     },
-    add_expenditure: function() {
-        var $menu_screen = $('#menu-screen');
+    add_expenditure: function($menu_screen) {
 
         var $date_select_div = this.make_$date_select_div();
         $menu_screen.append($date_select_div);
@@ -90,10 +89,6 @@ var add_type_menu = {
         $menu_screen.append(this.make_$amount_input_div());
 
         $menu_screen.append(this.make_$time_period_div());
-
-        $menu_screen.append($("<button type='submit' class='btn btn-primary'>Submit</button>"));
-
-        $menu_screen.append(this.make_$close_btn());
     },
 
 
