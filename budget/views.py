@@ -46,10 +46,15 @@ def index(request):
     )
 
 def add(request):
-    return render(
-        request,
-        'budget/add.html'
-    )
+    if request.method == "POST":
+        type = request.POST.get("Type")
+        return render(
+            request,
+            'budget/view_day.html',
+            context={
+                "type": type,
+            }
+        )
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic

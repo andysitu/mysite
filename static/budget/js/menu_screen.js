@@ -12,7 +12,10 @@ var menu_screen = {
 
         var $menu_option_div = $( '#menu-option-div' );
 
-        var $form = $("<form></form>"),
+        var $form = $("<form>", {
+                        action: add_url,
+                        method: "POST",
+                    }),
             $addType_div = $("<div class='form-group row'></div>");
 
         $addType_div.appendTo($form);
@@ -29,12 +32,27 @@ var menu_screen = {
 
         $menu_option_div.append($form);
 
-        $("<form class='form-group' id='menu-screen'></form>")
-            .appendTo($menu_option_div);
+        $("<div id='menu-screen'></div>")
+            .appendTo($form);
 
         // Get add type & then add corresponding menu
         add_type_menu.add_menuOption();
         $addType_select.change(add_type_menu.add_menuOption.bind(add_type_menu));
+
+        $form.submit(function(e){
+            e.preventDefault();
+            ajax_func.csrf_it();
+
+            $.ajax({
+                type: "POST",
+                url: add_url,
+                data: $form.serialize(),
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+
+        });
     },
     clear_all_menu: function() {
         $menu_option_div = $( '#menu-option-div' ).empty();

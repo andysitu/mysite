@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^view_day/(?P<year>\d{0,4})/(?P<month>\d{0,2})/(?P<day>\d{0,2})/$', views.view_day, name="view_day"),
     url(r'^view_prev_day/(?P<year>\d{0,4})/(?P<month>\d{0,2})/(?P<day>\d{0,2})/$', views.view_prev_day, name="view_prev_day"),
     url(r'^view_next_day/(?P<year>\d{0,4})/(?P<month>\d{0,2})/(?P<day>\d{0,2})/$', views.view_next_day, name="view_next_day"),
+
+    url(r'^add/$', views.add, name="add"),
 ]
