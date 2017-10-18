@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 import datetime
 
 # Create your views here.
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 def view_day(request, year=None, month=None, day=None):
     if year == None and month == None and day == None:
@@ -47,14 +47,10 @@ def index(request):
 
 def add(request):
     if request.method == "POST":
-        type = request.POST.get("Type")
-        return render(
-            request,
-            'budget/view_day.html',
-            context={
-                "type": type,
-            }
-        )
+        type = request.POST.get("add-type")
+        return JsonResponse({
+            "type": type,
+        });
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic

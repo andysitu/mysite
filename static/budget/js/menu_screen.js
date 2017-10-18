@@ -23,7 +23,8 @@ var menu_screen = {
         $("<label for='add-type-select' class='col-sm-1 col-form-label'>Type</label>").appendTo($addType_div);
         var $addType_select = $("<select>", {
             "class": "form-control",
-            id: "add-type-select",})
+            id: "add-type-select",
+            name: "add-type",})
                 .addClass("col-sm-2")
                 .appendTo($addType_div);
 
