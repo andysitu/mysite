@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import generic
+from .models import Expenditure
+
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
@@ -51,10 +55,6 @@ def add(request):
         return JsonResponse({
             "type": type,
         });
-
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views import generic
-from .models import Expenditure
 
 class ExpendituresByUserListView(LoginRequiredMixin, generic.ListView):
     """

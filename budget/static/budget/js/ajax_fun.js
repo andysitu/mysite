@@ -13,4 +13,18 @@ var ajax_func = {
             }
         });
     },
+    submit_add_form: function(e) {
+        e.preventDefault();
+        ajax_func.csrf_it();
+        var $form = $("#add-menu-form");
+
+        $.ajax({
+            type: "POST",
+            url: add_url,
+            data: $form.serialize(),
+            success: function(data) {
+                menu_screen.close_menu();
+            }
+        })
+    },
 }

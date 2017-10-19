@@ -15,6 +15,7 @@ var menu_screen = {
         var $form = $("<form>", {
                         action: add_url,
                         method: "POST",
+                        id: "add-menu-form",
                     }),
             $addType_div = $("<div class='form-group row'></div>");
 
@@ -40,20 +41,7 @@ var menu_screen = {
         add_type_menu.add_menuOption();
         $addType_select.change(add_type_menu.add_menuOption.bind(add_type_menu));
 
-        $form.submit(function(e){
-            e.preventDefault();
-            ajax_func.csrf_it();
-
-            $.ajax({
-                type: "POST",
-                url: add_url,
-                data: $form.serialize(),
-                success: function(data) {
-                    console.log(data);
-                }
-            })
-
-        });
+        $form.submit(ajax_func.submit_add_form);
     },
     clear_all_menu: function() {
         $menu_option_div = $( '#menu-option-div' ).empty();
