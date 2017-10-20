@@ -23,6 +23,7 @@ var ajax_func = {
             url: add_url,
             data: $form.serialize(),
             success: function(data) {
+                console.log(data);
                 menu_screen.close_menu();
             }
         })

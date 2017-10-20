@@ -103,7 +103,7 @@ var add_type_menu = {
         var $date_div = $("<div class='form-group row'></div>")
         $("<label for='add-date-input' class='col-sm-1 col-form-label'>Date</label>")
             .appendTo($date_div);
-        var $date_select = $("<input id='add-date-input' type='date' class='col-sm-3 form-control'>")
+        var $date_select = $("<input id='add-date-input' name='date' type='date' class='col-sm-3 form-control'>")
             .appendTo($date_div);
 
         // Set Default date to today
@@ -119,7 +119,7 @@ var add_type_menu = {
 
         $("<span class='input-group-addon'>$</span>")
             .appendTo($amount_div);
-        $("<input id='add-amount-input' type='number' class='col-sm-3 form-control'>")
+        $("<input id='add-amount-input' name='amount' type='number' class='col-sm-3 form-control'>")
             .appendTo($amount_div);
 
         return $amount_div;
@@ -129,10 +129,10 @@ var add_type_menu = {
 
         $("<label for='time-period-input' class='col-sm-1 col-form-label'>Time Period</label>")
             .appendTo($time_period_div);
-        $("<input id='time-period-input' type='number' class='col-sm-1 form-control'>")
+        $("<input id='time-period-input' name='time-amount' type='number' class='col-sm-1 form-control'>")
             .appendTo($time_period_div);
 
-        var $timePer_option = $("<select id='time-period-option' class='custom-select'></select>")
+        var $timePer_option = $("<select id='time-period-option' name='time-amount-type' class='custom-select'></select>")
             .appendTo($time_period_div);
         $("<option>Days</option>").appendTo($timePer_option);
         $("<option>Weeks</option>").appendTo($timePer_option);
