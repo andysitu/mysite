@@ -11,6 +11,8 @@ class DailyBalance(models.Model):
     balance = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
+
+
 class ExpenditureType(models.Model):
     type = models.CharField(max_length=50)
     description = models.CharField(max_length=200, default="")
@@ -30,8 +32,7 @@ class BaseExpenditure(models.Model):
 class Expenditure(BaseExpenditure):
     day = models.ForeignKey(DailyBalance)
 
-class RecurringExpenditure(BaseExpenditure):
-    days = models.ManyToManyField(DailyBalance)
+
 
 class IncomeType(models.Model):
     type = models.CharField(max_length=50)
@@ -48,6 +49,3 @@ class Income(models.Model):
 
     def __str__(self):
         return self.income
-
-class ProjectedIncome(Income):
-    estimated_amount = models.FloatField()
