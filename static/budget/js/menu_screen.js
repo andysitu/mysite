@@ -41,7 +41,7 @@ var menu_screen = {
         add_type_menu.add_menuOption();
         $addType_select.change(add_type_menu.add_menuOption.bind(add_type_menu));
 
-        $form.submit(ajax_func.submit_add_form);
+        $form.submit(menu_screen.submit_add_form);
     },
     clear_all_menu: function() {
         $menu_option_div = $( '#menu-option-div' ).empty();
@@ -50,6 +50,21 @@ var menu_screen = {
         $('#navbarSide').removeClass('reveal');
         $( '#menu-option-div' ).hide();
         $('.overlay').hide()
+    },
+    submit_add_form: function(e) {
+        e.preventDefault();
+        ajax_func.csrf_it();
+        var $form = $("#add-menu-form");
+
+        $.ajax({
+            type: "POST",
+            url: add_url,
+            data: $form.serialize(),
+            success: function(data) {
+                console.log(data);
+                menu_screen.close_menu();
+            }
+        })
     },
 };
 

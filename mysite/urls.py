@@ -23,6 +23,7 @@ app_name = "mysite"
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'budget/', include('budget.urls')),
+    url(r'budget_data/', include('budget_data.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^$', views.index, name="index"),
     url(r'^index/$', views.index,)

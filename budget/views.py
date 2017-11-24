@@ -3,9 +3,8 @@ import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
-from .models import Expenditure
+from budget_data.models import Expenditure
 
-# Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 def view_day(request, year=None, month=None, day=None):
@@ -63,7 +62,7 @@ def add(request):
             "time_amount": time_amount,
             "amount": amount,
             "time_amount_type": time_amount_type,
-        });
+        })
 
 class ExpendituresByUserListView(LoginRequiredMixin, generic.ListView):
     """
