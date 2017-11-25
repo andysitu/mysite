@@ -157,10 +157,10 @@ var add_type_menu = {
         return $time_period_div;
     },
     make_$close_btn: function() {
-        var $but = $("<button class='btn'>Close</button>");
+        var $button = $("<button class='btn'>Close</button>");
         $but.click(function(){
             menu_screen.close_menu();
         });
-        return $but;
+        return $button;
     },
 }

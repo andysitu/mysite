@@ -12,10 +12,10 @@ $( document ).ready(function() {
         $('.overlay').hide()
     });
 
-    //JS for pressing Add button
-    $('#add-button').click(function(){
-        $('.overlay').show();
-        $( '#menu-option-div' ).show();
-        menu_screen.create_menu("add");
-    });
+    // //JS for pressing Add button
+    // $('#add-button').click(function(){
+    //     $('.overlay').show();
+    //     $( '#menu-option-div' ).show();
+    //     menu_screen.create_menu("add");
+    // });
 });

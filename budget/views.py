@@ -48,6 +48,13 @@ def index(request):
         'budget/index.html',
     )
 
+def add_page(request):
+    return render(
+        request,
+        "budget/add.html",
+        context={},
+    )
+
 def add(request):
     if request.method == "POST":
         type = request.POST.get("add-type")
