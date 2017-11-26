@@ -1,4 +1,6 @@
 $( document ).ready(function() {
+    add_menu.create_menu();
+
     $("#add-form").submit(function(e){
         e.preventDefault();
         add_submit(e);
@@ -17,3 +19,4 @@ function add_submit(e) {
 function go_back(e) {
     location.replace(document.referrer);
 }
+
