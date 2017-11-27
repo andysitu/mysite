@@ -3,11 +3,11 @@ $( document ).ready(function() {
 
     $("input:radio[name=" + options_name + "]").change(
         function() {
-            var _val = $(this).val();
+            add_menu.set_menu();
         }
     );
 
-    add_menu.create_menu();
+    add_menu.set_menu();
 
     $("#add-form").submit(function(e){
         e.preventDefault();

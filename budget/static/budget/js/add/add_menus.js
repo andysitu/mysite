@@ -1,6 +1,6 @@
 var add_menu = {
     add_menu_container: "add-menu-container",
-    create_menu: function() {
+    set_menu: function() {
         var option = this.get_selected_add_option();
 
         switch(option) {
