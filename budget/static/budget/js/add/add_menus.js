@@ -1,6 +1,7 @@
 var add_menu = {
     add_menu_container: "add-menu-container",
     set_menu: function() {
+        this.empty_menu();
         var option = this.get_selected_add_option();
 
         switch(option) {
@@ -11,6 +12,9 @@ var add_menu = {
                 this.add_amount_input();
                 break;
         };
+    },
+    empty_menu: function() {
+        $("#" + this.add_menu_container).empty();
     },
     get_selected_add_option: function() {
         var options_name = add_menu_elements.add_options_name;
