@@ -1,4 +1,12 @@
 $( document ).ready(function() {
+    var options_name = add_menu_elements.add_options_name;
+
+    $("input:radio[name=" + options_name + "]").change(
+        function() {
+            var _val = $(this).val();
+        }
+    );
+
     add_menu.create_menu();
 
     $("#add-form").submit(function(e){
@@ -19,4 +27,3 @@ function add_submit(e) {
 function go_back(e) {
     location.replace(document.referrer);
 }
-

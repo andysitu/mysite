@@ -1,15 +1,31 @@
 var add_menu = {
     add_menu_container: "add-menu-container",
     create_menu: function() {
-        var $div = $("#" + this.add_menu_container);
+        var option = this.get_selected_add_option();
 
-        var $amount_input_div = add_elements.$amount_input_div();
+        switch(option) {
+            case "income":
+                this.add_amount_input();
+                break;
+            case "expenditure":
+                this.add_amount_input();
+                break;
+        };
+    },
+    get_selected_add_option: function() {
+        var options_name = add_menu_elements.add_options_name;
+
+        return $("input:radio[name=" + options_name + "]:checked").val();
+    },
+    add_amount_input: function() {
+        var $div = $("#" + this.add_menu_container),
+            $amount_input_div = add_elements.$amount_input_div();
         $div.append($amount_input_div);
     },
 };
 
 var add_menu_elements = {
-    add_type_options_name: "add-type-options",
+    add_options_name: "add-type-options",
     amount_select_id: "amount-select",
     amount_select_name: "amount",
 };
