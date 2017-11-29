@@ -7,9 +7,11 @@ var add_menu = {
         switch(option) {
             case "income":
                 this.add_amount_input();
+                this.add_date_input();
                 break;
             case "expenditure":
                 this.add_amount_input();
+                this.add_date_input();
                 break;
         };
     },
@@ -26,12 +28,19 @@ var add_menu = {
             $amount_input_div = add_elements.$amount_input_div();
         $div.append($amount_input_div);
     },
+    add_date_input: function() {
+        var $div = $("#" + this.add_menu_container),
+            $date_input_div = add_elements.$date_input_div();
+        $div.append($date_input_div);
+    }
 };
 
 var add_menu_elements = {
     add_options_name: "add-type-options",
     amount_select_id: "amount-select",
     amount_select_name: "amount",
+    date_input_name: "date",
+    date_input_id: "date-input",
 };
 
 var add_elements = {
@@ -39,7 +48,6 @@ var add_elements = {
         /**
          * Return $element for amount input (type:number)
          *  using the id & name from add_menu_elements.
-         * @type {*}
          */
         var $amount_div = $("<div class='form-group row'></div>");
 
@@ -50,15 +58,40 @@ var add_elements = {
         }).appendTo($amount_div);
 
         $amount_div.append(
-            $("<div class=input-group-addon>$</div>"),
+            $("<div class='input-group-addon'>$</div>"),
             $("<input>", {
                 id: add_menu_elements.amount_select_id,
                 type: "number",
                 name: add_menu_elements.amount_select_name,
                 "class": "col-sm-2 form-control",
-            })
-        )
+            }),
+        );
 
         return $amount_div;
+    },
+    $date_input_div: function() {
+        /**
+         * Return $element for date input
+         *  using the id & name from add_menu_elements.
+         */
+        var $date_div = $("<div class='form-group row'></div>");
+
+        $("<label>", {
+            "for": add_menu_elements.date_input_id,
+            "class": "col-sm-1 col-form-label",
+            "text": "Date",
+        }).appendTo($date_div);
+
+        $date_div.append(
+            $("<input>", {
+                id: add_menu_elements.date_input_id,
+                type: "date",
+                name: add_menu_elements.date_input_name,
+                "class": "col-sm-2 form-control",
+            }),
+        );
+        console.log($date_div);
+
+        return $date_div;
     },
 };
