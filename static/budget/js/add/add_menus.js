@@ -15,6 +15,9 @@ var add_menu = {
                 break;
         };
     },
+    get_container: function() {
+        return $("#" + this.add_menu_container);
+    },
     empty_menu: function() {
         $("#" + this.add_menu_container).empty();
     },
@@ -24,18 +27,19 @@ var add_menu = {
         return $("input:radio[name=" + options_name + "]:checked").val();
     },
     add_amount_input: function() {
-        var $div = $("#" + this.add_menu_container),
+        var $container = this.get_container(),
             $amount_input_div = add_elements.$amount_input_div();
-        $div.append($amount_input_div);
+        $container.append($amount_input_div);
     },
     add_date_input: function() {
-        var $div = $("#" + this.add_menu_container),
+        var $container = this.get_container(),
             $date_input_div = add_elements.$date_input_div();
-        $div.append($date_input_div);
-    }
+        $container.append($date_input_div);
+    },
 };
 
 var add_menu_elements = {
+    options_container_id: "options-container-div",
     add_options_name: "add-type-options",
     amount_select_id: "amount-select",
     amount_select_name: "amount",
@@ -44,6 +48,15 @@ var add_menu_elements = {
 };
 
 var add_elements = {
+    $options_container: function() {
+        /**
+         * Returns the options container that will be
+         *  emptied and its contents whenever type is changed.
+         */
+        return $("<div>", {
+            "class": add_menu_elements.options_container_id,
+        });
+    },
     $amount_input_div: function() {
         /**
          * Return $element for amount input (type:number)
@@ -90,7 +103,6 @@ var add_elements = {
                 "class": "col-sm-2 form-control",
             }),
         );
-        console.log($date_div);
 
         return $date_div;
     },
