@@ -40,7 +40,7 @@ var add_menu_elements = {
 
 var add_elements = {
     $amount_input_div: function() {
-        /**
+        /**Q
          * Return $element for amount input (type:number)
          *  using the id & name from add_menu_elements.
          */
@@ -77,14 +77,14 @@ var add_elements = {
             "text": "Date",
         }).appendTo($date_div);
 
-        $date_div.append(
-            $("<input>", {
-                id: add_menu_elements.date_input_id,
-                type: "date",
-                name: add_menu_elements.date_input_name,
-                "class": "col-sm-2 form-control",
-            }),
-        );
+        var $date_input = $("<input>", {
+            id: add_menu_elements.date_input_id,
+            type: "date",
+            name: add_menu_elements.date_input_name,
+            "class": "col-sm-2 form-control",
+        }).appendTo($date_div);
+
+        $date_input[0].valueAsDate = new Date();
 
         return $date_div;
     },

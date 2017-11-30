@@ -33,7 +33,6 @@ class Expenditure(BaseExpenditure):
     day = models.ForeignKey(DailyBalance)
 
 
-
 class IncomeType(models.Model):
     type = models.CharField(max_length=50)
     description = models.CharField(max_length=200, default="")
