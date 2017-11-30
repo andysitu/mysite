@@ -4,16 +4,8 @@ var add_menu = {
         this.empty_menu();
         var option = this.get_selected_add_option();
 
-        switch(option) {
-            case "income":
-                this.add_amount_input();
-                this.add_date_input();
-                break;
-            case "expenditure":
-                this.add_amount_input();
-                this.add_date_input();
-                break;
-        };
+        this.add_amount_input();
+        this.add_date_input();
     },
     get_container: function() {
         return $("#" + this.add_menu_container);
