@@ -31,7 +31,6 @@ var add_menu = {
 };
 
 var add_menu_elements = {
-    options_container_id: "options-container-div",
     add_options_name: "add-type-options",
     amount_select_id: "amount-select",
     amount_select_name: "amount",
@@ -40,15 +39,6 @@ var add_menu_elements = {
 };
 
 var add_elements = {
-    $options_container: function() {
-        /**
-         * Returns the options container that will be
-         *  emptied and its contents whenever type is changed.
-         */
-        return $("<div>", {
-            "class": add_menu_elements.options_container_id,
-        });
-    },
     $amount_input_div: function() {
         /**
          * Return $element for amount input (type:number)
