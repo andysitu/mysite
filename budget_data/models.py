@@ -30,7 +30,7 @@ class BaseExpenditure(models.Model):
         return str(self.amount_spent)
 
 class Expenditure(BaseExpenditure):
-    day = models.ForeignKey(DailyBalance)
+    day = models.ForeignKey(DailyBalance, on_delete=models.SET_NULL, null=True, blank=True)
 
 
 class IncomeType(models.Model):
