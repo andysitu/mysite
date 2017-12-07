@@ -1,17 +1,17 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 app_name = 'budget'
 urlpatterns = [
-    url(r'^(?P<month>\d+)_(?P<date>\d+)_(?P<year>\d+)/$', views.index, name="index-placeholder"),
-    url(r'^expenditures/$', views.ExpendituresByUserListView.as_view(), name='my-expenditures'),
-    url(r'^$', views.view_day, name='index'),
-    url(r'^view_day/$', views.view_day, name='view_day-blank'),
-    url(r'^view_day/(?P<year>\d{0,4})/(?P<month>\d{0,2})/(?P<day>\d{0,2})/$', views.view_day, name="view_day"),
-    url(r'^view_prev_day/(?P<year>\d{0,4})/(?P<month>\d{0,2})/(?P<day>\d{0,2})/$', views.view_prev_day, name="view_prev_day"),
-    url(r'^view_next_day/(?P<year>\d{0,4})/(?P<month>\d{0,2})/(?P<day>\d{0,2})/$', views.view_next_day, name="view_next_day"),
+    path('<int:month>_<int:date>_<int:year>/', views.index, name="index-placeholder"),
+    path('expenditures/', views.ExpendituresByUserListView.as_view(), name='my-expenditures'),
+    path('', views.view_day, name='index'),
+    path('view_day/', views.view_day, name='view_day-blank'),
+    path('view_day/<int:year>/<int:month>/<int:day>/', views.view_day, name="view_day"),
+    path('view_prev_day/<int:year>/<int:month>/<int:day>/', views.view_prev_day, name="view_prev_day"),
+    path('view_next_day/<int:year>/<int:month>/<int:day>/', views.view_next_day, name="view_next_day"),
 
-    url(r'^add/$', views.add, name="add"),
-    url(r'^add_page/$', views.add_page, name="add_page"),
+    path('add/', views.add, name="add"),
+    path('add_page/', views.add_page, name="add_page"),
 ]
