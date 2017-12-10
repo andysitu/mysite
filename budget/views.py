@@ -7,6 +7,14 @@ from budget_data.models import Expenditure
 
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
+def view_balance(request):
+    return render(
+        request,
+        'budget/view_balance.html',
+        context = {
+        }
+    )
+
 def view_day(request, year=None, month=None, day=None):
     if year == None and month == None and day == None:
         d = datetime.date.today()

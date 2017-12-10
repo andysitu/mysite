@@ -1,0 +1,34 @@
+{% extends "budget/budget_base_generic.html" %}
+
+{% load static %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'budget/js/ajax_fun.js' %}"></script>
+<script type="text/javascript" src="{% static 'budget/js/helper.js' %}"></script>
+<script type="text/javascript" src="{% static 'budget/js/menu_screen.js' %}"></script>
+<script type="text/javascript" src="{% static 'budget/js/view_day.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+{% csrf_token %}
+<script type="text/javascript">
+    var add_url = "{% url 'budget:add' %}";
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+</script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'budget/css/view_day.css' %}" />
+
+<div class="container">
+    <p><span class="glyphicon glyphicon-off"></span></p>
+
+    <div class="text-center">
+    </div>
+    <a class="btn btn-secondary" id="add-button" href="{% url 'budget:add_page' %}" role="button">
+        <i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+</div>
+
+<div class="center-block menu-option" id="menu-option-div"></div>
+
+{% endblock %}
