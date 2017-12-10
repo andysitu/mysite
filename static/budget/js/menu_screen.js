@@ -157,7 +157,7 @@ var add_type_menu = {
     },
     make_$close_btn: function() {
         var $button = $("<button class='btn'>Close</button>");
-        $but.click(function(){
+        $button.click(function(){
             menu_screen.close_menu();
         });
         return $button;
