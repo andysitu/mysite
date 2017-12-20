@@ -23,11 +23,11 @@ var menu_screen = {
 
         $("<label for='add-type-select' class='col-sm-1 col-form-label'>Type</label>").appendTo($addType_div);
         var $addType_select = $("<select>", {
-            "class": "form-control",
-            id: "add-type-select",
-            name: "add-type",})
-                .addClass("col-sm-2")
-                .appendTo($addType_div);
+                "class": "form-control",
+                id: "add-type-select",
+                name: "add-type",}
+            ).addClass("col-sm-2")
+            .appendTo($addType_div);
 
         $addType_select.append( $("<option>Income</option>"));
         $addType_select.append( $("<option>Expenditure</option>"));
@@ -75,8 +75,6 @@ var add_type_menu = {
         $menu_screen.empty();
 
         this.make_menuOption(type);
-
-        // this.make(type);
     },
     make_menuOption: function(type) {
         var $menu_screen = $('#menu-screen');
@@ -94,7 +92,6 @@ var add_type_menu = {
         $menu_screen.append(this.make_$close_btn());
     },
     add_income: function($menu_screen) {
-
         var $date_select_div = this.make_$date_select_div();
         $menu_screen.append($date_select_div);
 

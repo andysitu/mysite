@@ -28,4 +28,7 @@ var ajax_func = {
             }
         })
     },
+    get_accounts: function(e) {
+        
+    }
 }
