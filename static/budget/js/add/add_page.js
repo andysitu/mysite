@@ -1,12 +1,6 @@
 $( document ).ready(function() {
     var options_name = add_menu_elements.add_options_name;
 
-    $("input:radio[name=" + options_name + "]").change(
-        function() {
-            add_menu.set_menu();
-        }
-    );
-
     add_menu.set_menu();
 
     $("#add-form").submit(function(e){
