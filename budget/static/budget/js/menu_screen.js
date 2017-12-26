@@ -55,6 +55,8 @@ var menu_screen = {
         ajax_func.csrf_it();
         var $form = $("#add-menu-form");
 
+        console.log($form.serialize());
+
         $.ajax({
             type: "POST",
             url: add_url,
