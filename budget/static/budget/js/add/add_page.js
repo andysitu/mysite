@@ -15,7 +15,10 @@ $( document ).ready(function() {
 });
 
 function add_submit(e) {
-    go_back();
+    ajax_func.csrf_it();
+    add_menu.submit(e);
+
+    // go_back();
 }
 
 function go_back(e) {

@@ -1,4 +1,5 @@
 var add_menu = {
+    form_id: "add-form",
     add_menu_container: "add-menu-container",
     set_menu: function() {
         this.empty_menu();
@@ -18,6 +19,9 @@ var add_menu = {
 
         return $("input:radio[name=" + options_name + "]:checked").val();
     },
+    get_form: function() {
+        return $("#" + this.form_id);
+    },
     add_amount_input: function() {
         var $container = this.get_container(),
             $amount_input_div = add_elements.$amount_input_div();
@@ -28,6 +32,20 @@ var add_menu = {
             $date_input_div = add_elements.$date_input_div();
         $container.append($date_input_div);
     },
+    submit: function(e) {
+        ajax_func.csrf_it();
+
+        var $form = this.get_form();
+        console.log($form.serialize());
+        $.ajax({
+            type: $form.attr("method"),
+            url: $form.attr("action"),
+            data: $form.serialize(),
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
 };
 
 var add_menu_elements = {

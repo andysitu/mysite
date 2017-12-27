@@ -9,16 +9,22 @@
 {% endblock %}
 
 {% block content %}
+{% csrf_token %}
+<script type="text/javascript">
+    // using jQuery
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+</script>
+
 <div class="container">
     <h2>Adding Income/Expenditure</h2>
     <form id="add-form" action="{% url 'budget:add' %}" method="POST">
         <div class="form-group">
             <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-secondary active">
-                    <input type="radio" name="add-type-options" autocomplete="off" checked value="income"> Income
+                    <input type="radio" name="add-type" autocomplete="off" checked value="income"> Income
                 </label>
                 <label class="btn btn-secondary">
-                    <input type="radio" name="add-type-options" autocomplete="off" value="expenditure"> Expenditure
+                    <input type="radio" name="add-type" autocomplete="off" value="expenditure"> Expenditure
                 </label>
             </div>
         </div>
