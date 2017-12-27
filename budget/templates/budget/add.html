@@ -11,7 +11,7 @@
 {% block content %}
 <div class="container">
     <h2>Adding Income/Expenditure</h2>
-    <form id="add-form" method="{% url 'budget:add' %}" method="POST">
+    <form id="add-form" action="{% url 'budget:add' %}" method="POST">
         <div class="form-group">
             <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-secondary active">
