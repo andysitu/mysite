@@ -4,5 +4,5 @@ from . import views
 
 app_name = 'budget_data'
 urlpatterns = [
-    url(r'^add/$', views.add, name="add"),
+    url(r'^add/$', views.add_balance, name="add"),
 ]

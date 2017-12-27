@@ -63,18 +63,6 @@ def add_page(request):
         context={},
     )
 
-def add(request):
-    if request.method == "POST":
-        type = request.POST.get("add-type")
-        amount = request.POST.get("amount")
-        date = request.POST.get("date")
-
-        return JsonResponse({
-            "type": type,
-            "date": date,
-            "amount": amount,
-        })
-
 class ExpendituresByUserListView(LoginRequiredMixin, generic.ListView):
     """
     Generic class-based view listing expenditures held by current user
