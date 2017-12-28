@@ -7,6 +7,7 @@ var add_menu = {
 
         this.add_amount_input();
         this.add_date_input();
+        this.add_category_select();
     },
     get_container: function() {
         return $("#" + this.add_menu_container);
@@ -26,6 +27,11 @@ var add_menu = {
         var $container = this.get_container(),
             $amount_input_div = add_elements.$amount_input_div();
         $container.append($amount_input_div);
+    },
+    add_category_select: function() {
+        var $container = this.get_container(),
+            $category_select = add_elements.$category_select();
+        $container.append($category_select);
     },
     add_date_input: function() {
         var $container = this.get_container(),
@@ -52,13 +58,15 @@ var add_menu_elements = {
     add_options_name: "add-type-options",
     amount_select_id: "amount-select",
     amount_select_name: "amount",
+    category_select_id: "category-select",
+    category_select_name: "category",
     date_input_name: "date",
     date_input_id: "date-input",
 };
 
 var add_elements = {
     $amount_input_div: function() {
-        /**Q
+        /**
          * Return $element for amount input (type:number)
          *  using the id & name from add_menu_elements.
          */
@@ -81,6 +89,26 @@ var add_elements = {
         );
 
         return $amount_div;
+    },
+    $category_select: function() {
+        /**
+         * Return $element for selecting category.
+         */
+        var $div = $("<div class='form-group row'></div>");
+        $("<label>", {
+            "for": add_menu_elements.category_select_id,
+            "class": "col-sm-1 col-form-label",
+            "text": "Category",
+        }).appendTo($div);
+
+        var $select = $("<select>", {
+            id: add_menu_elements.category_select_id,
+            name: add_menu_elements.category_select_name,
+            "class": "col-sm-2 form-control",
+        }).appendTo($div);
+
+        return $div;
+
     },
     $date_input_div: function() {
         /**
