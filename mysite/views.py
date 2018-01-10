@@ -1,5 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import render
 
 def index(request):
-    return redirect('budget:index')
+    return render(
+        request,
+        "mysite/index.html",
+        {})
