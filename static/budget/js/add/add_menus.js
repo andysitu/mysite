@@ -66,7 +66,7 @@ var add_menu_elements = {
 
 var add_elements = {
     $amount_input_div: function() {
-        /**
+        /**Q
          * Return $element for amount input (type:number)
          *  using the id & name from add_menu_elements.
          */
