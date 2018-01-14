@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'budget.apps.BudgetConfig',
     'budget_data.apps.BudgetDataConfig',
+    'checktasks.apps.ChecktasksConfig',
 ]
 
 MIDDLEWARE = [
