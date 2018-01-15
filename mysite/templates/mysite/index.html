@@ -4,6 +4,9 @@
 
 {% block body %}
 
-<a href="{% url 'budget:index' %}">Budget</a>
+<ul>
+    <li><a href="{% url 'budget:index' %}">Budget</a></li>
+    <li><a href="{% url 'checktasks:main' %}">CheckTasks</a></li>
+</ul>
 
 {% endblock %}
