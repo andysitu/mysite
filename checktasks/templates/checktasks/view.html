@@ -1,3 +1,13 @@
 {% extends "checktasks/checktasks_base.html" %}
 
 {% load static %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'checktasks/js/view.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<button type="button" class="btn btn-primary">
+    <i class="fa fa-plus" aria-hidden="true"></i> Add
+</button>
+{% endblock %}
