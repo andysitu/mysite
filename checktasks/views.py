@@ -6,3 +6,6 @@ def view_tasks(request):
         request,
         "checktasks/view.html",
     )
+
+def add(request):
+    return HttpResponse("HELLO")

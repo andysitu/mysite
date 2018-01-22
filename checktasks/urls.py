@@ -5,4 +5,5 @@ from . import views
 app_name = "checktasks"
 urlpatterns = [
     path('', views.view_tasks, name="main"),
+    path('add', views.add, name="add"),
 ]

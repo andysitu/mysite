@@ -4,10 +4,17 @@
 
 {% block js %}
 <script type="text/javascript" src="{% static 'checktasks/js/view.js' %}"></script>
+
+<script type="text/javascript">
+    var add_url = "{% url 'checktasks:add' %}";
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+</script>
 {% endblock %}
 
 {% block content %}
 <button type="button" class="btn btn-primary" id="add-btn">
     <i class="fa fa-plus" aria-hidden="true"></i> Add
 </button>
+
+<div class="center-block menu-option" id="menu-option-div"></div>
 {% endblock %}
