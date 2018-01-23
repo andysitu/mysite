@@ -12,8 +12,13 @@ $(document).ready(function(){
 
 
 var add_menu = {
+    index: {
+        name_input: "name_input",
+    },
     create_menu: function() {
         var $menu_option_div = $( '#menu-option-div' );
+
+        $menu_option_div.empty();
 
         var $form = this.create_form();
         $menu_option_div.append($form);
@@ -28,9 +33,23 @@ var add_menu = {
             method: "POST",
             id: "add-menu-form",
         });
-        $addType_div = $("<div class='form-group row'></div>");
 
-        $addType_div.appendTo($form);
+        var $div;
+
+        $div = $("<div class='form-group row'></div>");
+        $("<label>", {
+            "class": "col-sm-2 col-form-label",
+            "for": this.index.name_input,
+        }).text("Name").appendTo($div);
+
+        $("<input>", {
+            id: this.index.name_input,
+            "class": "col-sm-4 form-control",
+            name: "name",
+        }).appendTo($div);
+
+        $form.append($div);
+
         return $form;
     }
 };
