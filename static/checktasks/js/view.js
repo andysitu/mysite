@@ -42,13 +42,24 @@ var add_menu = {
             "for": this.index.name_input,
         }).text("Name").appendTo($div);
 
-        $("<input>", {
+        $("<input/>", {
             id: this.index.name_input,
             "class": "col-sm-4 form-control",
             name: "name",
         }).appendTo($div);
-
         $form.append($div);
+
+        $("<button/>", {
+            "type": "submit",
+            "class": "btn btn-primary",
+            "text": "Submit",
+        }).appendTo($form);
+
+        $("<button/>", {
+            "class": "btn btn-secondary",
+            text: "Cancel",
+        }).appendTo($form);
+
 
         return $form;
     }
