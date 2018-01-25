@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block js %}
+{% csrf_token %}
 <script type="text/javascript" src="{% static 'checktasks/js/view.js' %}"></script>
 <script type="text/javascript" src="{% static 'checktasks/js/tasks.js' %}"></script>
 

@@ -14,6 +14,14 @@ var tasks = {
         });
     },
     add: function($add_form) {
-        console.log($add_form);
-    }
+        tasks.csrf_it();
+        $.ajax({
+            type: "POST",
+            url: add_url,
+            data: $add_form.serialize(),
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    },
 };
