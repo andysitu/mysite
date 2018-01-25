@@ -11,11 +11,17 @@ $(document).ready(function(){
 
 var add_menu = {
     index: {
+        form_id: "add-form",
         name: "name",
         name_input_element: "name_input",
         description: "description",
         description_textarea: "description_text",
 
+    },
+    submitter: function(e) {
+        e.preventDefault();
+        var $form = $("#" + add_menu.index.form_id)
+        tasks.add($form);
     },
     create_menu: function() {
         var $menu_option_div = $( '#menu-option-div' );
@@ -35,7 +41,8 @@ var add_menu = {
         var $form = $("<form>", {
             action: add_url,
             method: "POST",
-            id: "add-menu-form",
+            id: this.index.form_id,
+            submit: this.submitter,
         });
 
         var $div;
