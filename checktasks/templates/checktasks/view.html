@@ -18,5 +18,9 @@
     <i class="fa fa-plus" aria-hidden="true"></i> Add
 </button>
 
+{% for task in tasks %}
+<div>{{ task.name }}</div>
+{% endfor %}
+
 <div class="center-block menu-option" id="menu-option-div"></div>
 {% endblock %}
