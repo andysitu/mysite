@@ -24,4 +24,8 @@ def add(request):
     if request.method == "POST":
         name = request.POST.get("name")
         task = Task(name=name, user=user)
-    return JsonResponse({"name": name})
+        task.save()
+
+        return JsonResponse({"name": name})
+
+    return JsonResponse({})

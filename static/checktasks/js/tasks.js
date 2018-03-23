@@ -13,7 +13,7 @@ var tasks = {
             }
         });
     },
-    add: function($add_form) {
+    add: function($add_form, run_on_success) {
         tasks.csrf_it();
         $.ajax({
             type: "POST",
@@ -21,6 +21,9 @@ var tasks = {
             data: $add_form.serialize(),
             success: function(data) {
                 console.log(data);
+                if (typeof run_on_success == "function") {
+                    run_on_success();
+                }
             }
         });
     },

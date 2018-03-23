@@ -20,8 +20,13 @@ var add_menu = {
     },
     submitter: function(e) {
         e.preventDefault();
-        var $form = $("#" + add_menu.index.form_id)
-        tasks.add($form);
+        var $add_form = $("#" + add_menu.index.form_id)
+
+        function run_on_success() {
+            add_menu.close_menu();
+        }
+
+        tasks.add($add_form, run_on_success);
     },
     create_menu: function() {
         var $menu_option_div = $( '#menu-option-div' );
