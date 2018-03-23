@@ -4,18 +4,18 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import DateRecord, Task
 
 def view_tasks(request):
-    tasks = Task.objects.all()
+    user = request.user
+    tasks = Task.objects.filter(user=user)
     tasks_list = []
 
     for task in tasks:
         tasks_list.append(task)
 
-
     return render(
         request,
         "checktasks/view.html",
         {
-            tasks: tasks_list,
+            "tasks": tasks_list,
         }
     )
 
