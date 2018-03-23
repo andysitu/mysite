@@ -23,7 +23,7 @@ var add_menu = {
         var $add_form = $("#" + add_menu.index.form_id)
 
         function run_on_success() {
-            add_menu.close_menu();
+            location.reload();
         }
 
         tasks.add($add_form, run_on_success);
