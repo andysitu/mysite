@@ -8,7 +8,6 @@ $(document).ready(function(){
     });
 });
 
-
 var add_menu = {
     index: {
         form_id: "add-form",
