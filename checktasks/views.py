@@ -1,12 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 from .models import DateRecord, Task
 
 def view_tasks(request):
+    tasks_list = []
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('login'))
     user = request.user
     tasks = Task.objects.filter(user=user)
-    tasks_list = []
 
     for task in tasks:
         tasks_list.append(task)
