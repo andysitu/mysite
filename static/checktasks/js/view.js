@@ -8,6 +8,30 @@ $(document).ready(function(){
     });
 });
 
+var viewer = {
+    get_$tasksDiv: function() {
+        return $("tasks_div");
+    },
+    tasks: null,
+    remove_tasks: function() {
+        /**
+         * Remove tasks from #tasks_div & classes
+         */
+        this.get_$tasksDiv().empty();
+    },
+    display_tasks: function() {
+        var $tasks_div = this.get_$tasksDiv();
+
+        var $table = $("<table>");
+        var $tbody = $("<tbody>");
+        $table.append($tbody);
+    },
+
+    get_tasks: function() {
+        
+    }
+};
+
 var add_menu = {
     index: {
         form_id: "add-form",
