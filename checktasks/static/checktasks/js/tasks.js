@@ -28,3 +28,7 @@ var tasks = {
         });
     },
 };
+
+class Task {
+    // JS component. Handles display HTML & retrieving data from Tasks model
+}

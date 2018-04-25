@@ -4,15 +4,10 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import DateRecord, Task
 
 def view_tasks(request):
-    tasks_list = []
-
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
-    user = request.user
-    tasks = Task.objects.filter(user=user)
 
-    for task in tasks:
-        tasks_list.append(task)
+    tasks_list = get_tasks(request.user)
 
     return render(
         request,
@@ -21,6 +16,20 @@ def view_tasks(request):
             "tasks": tasks_list,
         }
     )
+
+def get_tasks(user):
+    """
+    Retrieves all of the tasks for a particular user.
+    :param user: request.user
+    :return: lists containing all of Tasks for that user
+    """
+    tasks_list = []
+    tasks = Task.objects.filter(user=user)
+
+    for task in tasks:
+        tasks_list.append(task)
+
+    return tasks_list
 
 def add(request):
     user = request.user
