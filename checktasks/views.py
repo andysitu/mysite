@@ -41,3 +41,19 @@ def add(request):
         return JsonResponse({"name": name})
 
     return JsonResponse({})
+
+def ajax_tasks(request):
+    """
+        Retrieves all of the tasks for a particular user.
+        :param user: request.user
+        :return: lists containing all of Tasks for that user
+    """
+
+    tasks_list = []
+    user = request.user
+    tasks = Task.objects.filter(user=user)
+
+    for task in tasks:
+        tasks_list.append(task.name)
+
+    return JsonResponse(tasks_list, safe=False)

@@ -6,11 +6,13 @@ $(document).ready(function(){
     $('.overlay').click(function() {
         add_menu.close_menu();
     });
+
+    viewer.make_tasks_table();
 });
 
 var viewer = {
     get_$tasksDiv: function() {
-        return $("tasks_div");
+        return $("#tasks-div");
     },
     tasks: null,
     remove_tasks: function() {
@@ -19,17 +21,19 @@ var viewer = {
          */
         this.get_$tasksDiv().empty();
     },
-    display_tasks: function() {
+    make_tasks_table: function() {
         var $tasks_div = this.get_$tasksDiv();
 
         var $table = $("<table>");
         var $tbody = $("<tbody>");
-        $table.append($tbody);
-    },
 
-    get_tasks: function() {
-        
-    }
+        var tasks = tasks_functions.get_tasks();
+        console.log(tasks);
+
+        $table.append($tbody);
+
+        $tasks_div.append($table);
+    },
 };
 
 var add_menu = {
@@ -49,7 +53,7 @@ var add_menu = {
             location.reload();
         }
 
-        tasks.add($add_form, run_on_success);
+        tasks_functions.add($add_form, run_on_success);
     },
     create_menu: function() {
         var $menu_option_div = $( '#menu-option-div' );
