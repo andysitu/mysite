@@ -65,8 +65,7 @@ var viewer = {
         }
         $tasks_table.append($tbody);
     },
-    
-};
+}
 
 var add_menu = {
     index: {

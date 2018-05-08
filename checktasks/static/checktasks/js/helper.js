@@ -11,4 +11,21 @@ var helper = {
         }
         return date_arr;
     },
+
+    get_date: function() {
+        var stor = window.localStorage;
+        var dStor = stor.getItem("checkTasks_jdate");
+        if (dStor == undefined || dStor == null) {
+            var d = new Date();
+            this.set_date(d.getYear(), d.getMonth(), d.getDate());
+            return this.get_date();
+        } else {
+            return JSON.parse(dStor);
+        }
+    },
+    set_date: function(year, month, date) {
+        var stor = window.localStorage;
+
+        stor.setItem("checkTasks_jdate", JSON.stringify({"date": date, "year": year, "month": month,}));
+    },
 };
