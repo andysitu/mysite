@@ -11,30 +11,61 @@ $(document).ready(function(){
 });
 
 var viewer = {
-    get_$tasksDiv: function() {
-        return $("#tasks-div");
+    get_element: function(element, type) {
+        // type - element name, id, or $element
+        switch(element) {
+            case "table":
+                if (type == "$")
+                    return $("#tasks-table");
+                else
+                    return "tasks-table";
+            case "tasks-div":
+                if (type == "$")
+                    return $("#tasks-div");
+                else
+                    return "tasks-div";
+            default:
+                return "";
+        }
     },
     tasks: null,
     remove_tasks: function() {
         /**
          * Remove tasks from #tasks_div & classes
          */
-        this.get_$tasksDiv().empty();
+        this.get_element("tasks-div", "$").empty();
     },
     make_tasks_table: function() {
-        var $tasks_div = this.get_$tasksDiv();
+        var $tasks_div = this.get_element("tasks-div", "$");
 
-        var $table = $("<table>");
-        var $tbody = $("<tbody>");
+        var $table = $("<table>", {
+            id: this.get_element("table"),
+        });
 
-        var tasks = tasks_functions.get_tasks();
-        console.log(tasks);
+        $tasks_div.append($table)
 
-        $table.append($tbody);
-
-        $tasks_div.append($table);
+        tasks_functions.get_tasks(this.add_tasks);
     },
-};
+    add_tasks: function(tasks_list) {
+        var d = new Date();
+        console.log(d.getFullYear(), d.getMonth(), d.getDate());
+
+        var tasks_length = tasks_list.length,
+            $tbody = $("<tbody>");
+
+        var $tasks_table = viewer.get_element("table", "$");
+        var $tr, $th;
+
+        for (var i = 0; i < tasks_length; i++) {
+            $tr = $("<tr>");
+            $th = $("<th>", {
+                text: tasks_list[i],
+            }).appendTo($tr);
+            $tr.appendTo($tbody);
+        }
+        $tasks_table.append($tbody);
+    },
+}
 
 var add_menu = {
     index: {

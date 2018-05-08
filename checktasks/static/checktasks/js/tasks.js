@@ -27,15 +27,14 @@ var tasks_functions = {
             }
         });
     },
-    get_tasks: function() {
+    get_tasks: function(callback_function) {
         tasks_functions.csrf_it();
         $.ajax({
             type: "GET",
             url: get_tasksAjax_url,
             data: {},
             success: function(data) {
-                console.log(data);
-                return "Done";
+                callback_function(data);
             }
         });
     }
