@@ -24,6 +24,11 @@ var viewer = {
                     return $("#tasks-div");
                 else
                     return "tasks-div";
+            case "dateRow-div":
+                if (type == "$")
+                    return $("dateRow-div");
+                else
+                    return "dateRow-div";
             default:
                 return "";
         }
@@ -42,14 +47,12 @@ var viewer = {
             id: this.get_element("table"),
         });
 
-        $tasks_div.append($table)
+        $tasks_div.append($table);
 
+        this.add_dateRow();
         tasks_functions.get_tasks(this.add_tasks);
     },
     add_tasks: function(tasks_list) {
-        var d = new Date();
-        console.log(d.getFullYear(), d.getMonth(), d.getDate());
-
         var tasks_length = tasks_list.length,
             $tbody = $("<tbody>");
 
@@ -64,6 +67,31 @@ var viewer = {
             $tr.appendTo($tbody);
         }
         $tasks_table.append($tbody);
+    },
+    add_dateRow: function() {
+        var date_obj = helper.get_date(),
+            $thead, $tr, $th,
+            i;
+        console.log(date_obj);
+        var month = date_obj.month,
+            year = date_obj.year,
+            date = date_obj.date;
+        var last_dateOfmonth = new Date(year, month+1, 0).getDate();
+
+        var $table = this.get_element("table", "$");
+        var $thead = $("<thead>");
+
+        $tr = $("<tr>");
+        $tr.append($("<th>", {text: " "}));
+
+        for (i = 1; i <last_dateOfmonth+1; i++) {
+            $tr.append($("<th>", {text: i}));
+        }
+
+        $thead.append($tr);
+        $table.append($thead);
+
+
     },
 }
 

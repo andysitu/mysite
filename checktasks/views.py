@@ -57,3 +57,6 @@ def ajax_tasks(request):
         tasks_list.append(task.name)
 
     return JsonResponse(tasks_list, safe=False)
+
+def ajax_dateRecords(request):
+    pass
