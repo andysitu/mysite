@@ -12,10 +12,16 @@ var helper = {
         return date_arr;
     },
 
+    date_verName: "dateVer",
+    date_version: "0.0.1",
     get_date: function() {
+
         var stor = window.localStorage;
-        var dStor = stor.getItem("checkTasks_jdate");
-        if (dStor == undefined || dStor == null) {
+
+        var dStor = stor.getItem("checkTasks_jdate"),
+            check_ver = stor.getItem(this.date_verName);
+
+        if (dStor == undefined || dStor == null || check_ver != this.date_version) {
             var d = new Date();
             this.set_date(d.getYear(), d.getMonth(), d.getDate());
             return this.get_date();
@@ -27,5 +33,6 @@ var helper = {
         var stor = window.localStorage;
 
         stor.setItem("checkTasks_jdate", JSON.stringify({"date": date, "year": year, "month": month,}));
+        stor.setItem(this.date_verName, this.date_version);
     },
 };

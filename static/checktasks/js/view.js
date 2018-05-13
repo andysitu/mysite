@@ -11,8 +11,9 @@ $(document).ready(function(){
 });
 
 var viewer = {
-    get_element: function(element, type) {
+    get_element: function(element, type, identifier) {
         // type - element name, id, or $element
+        // identifier - additional string added, ie # added at end.
         switch(element) {
             case "table":
                 if (type == "$")
@@ -29,6 +30,15 @@ var viewer = {
                     return $("dateRow-div");
                 else
                     return "dateRow-div";
+            case "date-th":
+                if (identifier != undefined || identifier != null) {
+                    if (type == "$")
+                        return $("#date-td-" + identifier);
+                    else
+                        return ("date-td-" + identifier);
+                } else {
+
+                }
             default:
                 return "";
         }
@@ -44,7 +54,7 @@ var viewer = {
         var $tasks_div = this.get_element("tasks-div", "$");
 
         var $table = $("<table>", {
-            id: this.get_element("table"),
+            id: this.get_element("table", "id"),
         });
 
         $tasks_div.append($table);
@@ -57,11 +67,11 @@ var viewer = {
             $tbody = $("<tbody>");
 
         var $tasks_table = viewer.get_element("table", "$");
-        var $tr, $th;
+        var $tr, $td;
 
         for (var i = 0; i < tasks_length; i++) {
             $tr = $("<tr>");
-            $th = $("<th>", {
+            $td = $("<td>", {
                 text: tasks_list[i],
             }).appendTo($tr);
             $tr.appendTo($tbody);
@@ -85,7 +95,12 @@ var viewer = {
         $tr.append($("<th>", {text: " "}));
 
         for (i = 1; i <last_dateOfmonth+1; i++) {
-            $tr.append($("<th>", {text: i}));
+            console.log(viewer.get_element("date-th", "id", i),)
+            $tr.append(
+                $("<th>", {
+                    text: i,
+                    id: viewer.get_element("date-th", "id", i),}
+                ));
         }
 
         $thead.append($tr);
