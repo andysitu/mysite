@@ -1,6 +1,6 @@
 var helper = {
     // year, month, day, num_days [int]
-    // Return Date object
+    // Return date object
     get_dates: function(start_year, start_month, start_day, num_days) {
 
         var date_arr = [];
@@ -13,27 +13,26 @@ var helper = {
     },
 
     date_verName: "dateVer",
-    date_version: "0.0.3",
+    date_version: "0.0.2",
     get_date: function() {
+
         var stor = window.localStorage;
 
-        var dateStored = stor.getItem("checkTasks_date"),
+        var dStor = stor.getItem("checkTasks_jdate"),
             check_ver = stor.getItem(this.date_verName);
 
-        if (dateStored == undefined || dateStored == null || check_ver != this.date_version) {
+        if (dStor == undefined || dStor == null || check_ver != this.date_version) {
             var d = new Date();
             this.set_date(d.getFullYear(), d.getMonth(), d.getDate());
             return this.get_date();
         } else {
-            return dateStored;
+            return JSON.parse(dStor);
         }
     },
     set_date: function(year, month, date) {
         var stor = window.localStorage;
 
-        var d = new Date(year, month, date);
-
-        stor.setItem("checkTasks_date", d);
+        stor.setItem("checkTasks_jdate", JSON.stringify({"date": date, "year": year, "month": month,}));
         stor.setItem(this.date_verName, this.date_version);
     },
 };

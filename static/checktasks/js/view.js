@@ -82,7 +82,6 @@ var viewer = {
         var date_obj = helper.get_date(),
             $thead, $tr, $th,
             i;
-        console.log(date_obj);
         var month = date_obj.month,
             year = date_obj.year,
             date = date_obj.date;
@@ -95,7 +94,6 @@ var viewer = {
         $tr.append($("<th>", {text: " "}));
 
         for (i = 1; i <last_dateOfmonth+1; i++) {
-            console.log(viewer.get_element("date-th", "id", i),)
             $tr.append(
                 $("<th>", {
                     text: i,
@@ -105,8 +103,6 @@ var viewer = {
 
         $thead.append($tr);
         $table.append($thead);
-
-
     },
 }
 
