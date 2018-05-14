@@ -44,6 +44,7 @@ var viewer = {
         }
     },
     tasks: null,
+    table_columns: 0,
     remove_tasks: function() {
         /**
          * Remove tasks from #tasks_div & classes
@@ -55,7 +56,10 @@ var viewer = {
 
         var $table = $("<table>", {
             id: this.get_element("table", "id"),
+            "class": "table table-sm",
         });
+
+        $table.hover(this.hover_table);
 
         $tasks_div.append($table);
 
@@ -67,36 +71,52 @@ var viewer = {
             $tbody = $("<tbody>");
 
         var $tasks_table = viewer.get_element("table", "$");
-        var $tr, $td;
+        var $tr, $td,
+            table_columns = viewer.table_columns;
 
         for (var i = 0; i < tasks_length; i++) {
             $tr = $("<tr>");
-            $td = $("<td>", {
+            $tr.append($("<th>", {
                 text: tasks_list[i],
-            }).appendTo($tr);
+                scope: "row",
+            }));
+
+            for (var j = 0; j < table_columns -1; j++) {
+                $td = $("<td>").appendTo($tr);
+            }
             $tr.appendTo($tbody);
         }
         $tasks_table.append($tbody);
     },
     add_dateRow: function() {
-        var date_obj = helper.get_date(),
+        var dateJSON = helper.get_date(),
             $thead, $tr, $th,
             i;
-        var month = date_obj.month,
-            year = date_obj.year,
-            date = date_obj.date;
-        var last_dateOfmonth = new Date(year, month+1, 0).getDate();
+        var month = dateJSON.month,
+            year = dateJSON.year,
+            date = dateJSON.date;
+        var lastDateObj = new Date(year, month+1, 0),
+            last_dateOfmonth = lastDateObj.getDate();
+
+        this.table_columns = last_dateOfmonth + 1;
+
+        var locale = "en-us",
+            monthString = lastDateObj.toLocaleString(locale, {month: "long" });
 
         var $table = this.get_element("table", "$");
         var $thead = $("<thead>");
 
         $tr = $("<tr>");
-        $tr.append($("<th>", {text: " "}));
+        $tr.append($("<th>", {
+            text: monthString,
+            "class": "col",
+        }));
 
         for (i = 1; i <last_dateOfmonth+1; i++) {
             $tr.append(
                 $("<th>", {
                     text: i,
+                    "class": "col",
                     id: viewer.get_element("date-th", "id", i),}
                 ));
         }
@@ -104,7 +124,10 @@ var viewer = {
         $thead.append($tr);
         $table.append($thead);
     },
-}
+    hover_table: function(e) {
+        console.log(e);
+    }
+};
 
 var add_menu = {
     index: {
@@ -197,5 +220,5 @@ var add_menu = {
         }).appendTo($form);
 
         return $form;
-    }
+    },
 };

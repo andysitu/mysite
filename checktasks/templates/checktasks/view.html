@@ -8,6 +8,8 @@
 <script type="text/javascript" src="{% static 'checktasks/js/view.js' %}"></script>
 <script type="text/javascript" src="{% static 'checktasks/js/tasks.js' %}"></script>
 
+<link href="{% static 'checktasks/css/viewer.css' %}" type="text/css" rel="stylesheet" />
+
 <script type="text/javascript">
     var add_url = "{% url 'checktasks:add' %}";
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
