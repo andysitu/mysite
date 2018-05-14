@@ -83,13 +83,12 @@ var viewer = {
         var $tr, $td,
             table_columns = viewer.table_columns;
 
-        for (var i = 1; i < tasks_length + 1; i++) {
+        for (var i = 0; i < tasks_length; i++) {
             // Append tasks name column
             $tr = $("<tr>");
             $tr.append($("<th>", {
                 text: tasks_list[i],
                 scope: "row",
-
             }));
 
             // Append rest of tasks row
@@ -139,7 +138,7 @@ var viewer = {
         $table.append($thead);
     },
     hover_table: function(e) {
-        console.log(e);
+        console.log(e.target);
     }
 };
 
