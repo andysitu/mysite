@@ -37,8 +37,17 @@ var viewer = {
                     else
                         return ("date-td-" + identifier);
                 } else {
-
+                    return "";
                 }
+            case "tasks-td":
+                if (identifier != undefined || identifier != null) {
+                    if (type == "$") {
+                        return $("#tasks-td" + identifier);
+                    } else {
+                        return ("tasks-td" + identifier);
+                    }
+                } else
+                    return "";
             default:
                 return "";
         }
@@ -74,15 +83,20 @@ var viewer = {
         var $tr, $td,
             table_columns = viewer.table_columns;
 
-        for (var i = 0; i < tasks_length; i++) {
+        for (var i = 1; i < tasks_length + 1; i++) {
+            // Append tasks name column
             $tr = $("<tr>");
             $tr.append($("<th>", {
                 text: tasks_list[i],
                 scope: "row",
+
             }));
 
+            // Append rest of tasks row
             for (var j = 0; j < table_columns -1; j++) {
-                $td = $("<td>").appendTo($tr);
+                $td = $("<td>", {
+                    id: viewer.get_element("date-th", "id", tasks_list[i] + "-" + i),
+                }).appendTo($tr);
             }
             $tr.appendTo($tbody);
         }
@@ -109,14 +123,14 @@ var viewer = {
         $tr = $("<tr>");
         $tr.append($("<th>", {
             text: monthString,
-            "class": "col",
+            scope: "col",
         }));
 
         for (i = 1; i <last_dateOfmonth+1; i++) {
             $tr.append(
                 $("<th>", {
                     text: i,
-                    "class": "col",
+                    scope: "col",
                     id: viewer.get_element("date-th", "id", i),}
                 ));
         }
