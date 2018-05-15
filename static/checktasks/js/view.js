@@ -31,28 +31,25 @@ var viewer = {
                 else
                     return "dateRow-div";
             case "date-th":
-                if (identifier != undefined || identifier != null) {
-                    if (type == "$")
-                        return $("#date-td-" + identifier);
-                    else
-                        return ("date-td-" + identifier);
-                } else {
-                    return "";
-                }
+                if (identifier == undefined || identifier == null)
+                    identifier = "";
+                if (type == "$")
+                    return $("#date-th-" + identifier);
+                else
+                    return ("date-th-" + identifier);
             case "tasks-td":
-                if (identifier != undefined || identifier != null) {
-                    if (type == "$") {
-                        return $("#tasks-td" + identifier);
-                    } else {
-                        return ("tasks-td" + identifier);
-                    }
-                } else
-                    return "";
+                if (identifier == undefined || identifier == null)
+                    identifier = "";
+                if (type == "$") {
+                    return $("#tasks-td-" + identifier);
+                } else {
+                    return ("tasks-td-" + identifier);
+                }
             default:
                 return "";
         }
     },
-    tasks: null,
+    tasks: [],
     table_columns: 0,
     remove_tasks: function() {
         /**
@@ -68,7 +65,7 @@ var viewer = {
             "class": "table table-sm",
         });
 
-        $table.hover(this.hover_table);
+        $table.click(this.mouseClick);
 
         $tasks_div.append($table);
 
@@ -80,21 +77,24 @@ var viewer = {
             $tbody = $("<tbody>");
 
         var $tasks_table = viewer.get_element("table", "$");
-        var $tr, $td,
+        var $tr, $td, task, taskName,
             table_columns = viewer.table_columns;
 
         for (var i = 0; i < tasks_length; i++) {
+            taskName = tasks_list[i];
+            viewer.tasks.push(new Task(taskName));
+
             // Append tasks name column
             $tr = $("<tr>");
             $tr.append($("<th>", {
-                text: tasks_list[i],
+                text: taskName,
                 scope: "row",
             }));
 
             // Append rest of tasks row
-            for (var j = 0; j < table_columns -1; j++) {
+            for (var j = 1; j < table_columns; j++) {
                 $td = $("<td>", {
-                    id: viewer.get_element("date-th", "id", tasks_list[i] + "-" + i),
+                    id: viewer.get_element("tasks-td", "id", taskName + "-" + j),
                 }).appendTo($tr);
             }
             $tr.appendTo($tbody);
@@ -137,8 +137,21 @@ var viewer = {
         $thead.append($tr);
         $table.append($thead);
     },
-    hover_table: function(e) {
-        console.log(e.target);
+
+    mouseClick: function(e) {
+        var target = e.target,
+            eleType = target.nodeName;
+
+        if (eleType == "TD") {
+            var td_prefix_name = viewer.get_element("tasks-td", "id", ""),
+                re = new RegExp(td_prefix_name + '(.+)-(\\d+)');
+
+            var reResults = re.exec(target.id),
+                taskName = reResults[1],
+                dateCol = reResults[2];
+
+            console.log(taskName, dateCol);
+        }
     }
 };
 
