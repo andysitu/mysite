@@ -58,5 +58,5 @@ def ajax_tasks(request):
 
     return JsonResponse(tasks_list, safe=False)
 
-def ajax_dateRecords(request):
+def click_task_ajax(request):
     pass

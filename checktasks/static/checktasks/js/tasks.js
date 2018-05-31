@@ -37,6 +37,11 @@ var tasks_functions = {
                 callback_function(data);
             }
         });
+    },
+    click: function(taskName, year, month, date) {
+        tasks_functions.csrf_it();
+
+        console.log(taskName, year, month, date);
     }
 };
 

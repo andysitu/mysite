@@ -37,6 +37,9 @@ var tasks_functions = {
                 callback_function(data);
             }
         });
+    },
+    click: function(taskName, year, month, date) {
+        console.log(taskName, year, month, date);
     }
 };
 

@@ -11,6 +11,14 @@ $(document).ready(function(){
 });
 
 var viewer = {
+    set_date: function(year, month, date) {
+        this.month = month;
+        this.year = year;
+        this.date = date;
+    },
+    year: null,
+    month: null,
+    date: null,
     get_element: function(element, type, identifier) {
         // type - element name, id, or $element
         // identifier - additional string added, ie # added at end.
@@ -65,7 +73,7 @@ var viewer = {
             "class": "table table-sm",
         });
 
-        $table.click(this.mouseClick);
+        $table.click(this.mouseClick.bind(this));
 
         $tasks_div.append($table);
 
@@ -108,6 +116,9 @@ var viewer = {
         var month = dateJSON.month,
             year = dateJSON.year,
             date = dateJSON.date;
+
+        this.set_date(year,month,date);
+
         var lastDateObj = new Date(year, month+1, 0),
             last_dateOfmonth = lastDateObj.getDate();
 
@@ -150,7 +161,7 @@ var viewer = {
                 taskName = reResults[1],
                 dateCol = reResults[2];
 
-            console.log(taskName, dateCol);
+            tasks_functions.click(taskName, this.year, this.month, parseInt(dateCol) );
         }
     }
 };
