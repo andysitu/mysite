@@ -1,7 +1,7 @@
 from django.shortcuts import render, reverse
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
-from .models import DateRecord, Task
+from .models import Task, DateRecord
 
 def view_tasks(request):
     if not request.user.is_authenticated:
@@ -27,6 +27,7 @@ def get_tasks(user):
     tasks = Task.objects.filter(user=user)
 
     for task in tasks:
+        task = {}
         tasks_list.append(task)
 
     return tasks_list
@@ -58,5 +59,21 @@ def ajax_tasks(request):
 
     return JsonResponse(tasks_list, safe=False)
 
+
 def click_task_ajax(request):
-    pass
+    taskName = request.POST.get("task")
+    year = int(request.POST.get("year"))
+    month = int(request.POST.get("month"))
+    day = int(request.POST.get("day"))
+
+    dateRecord = DateRecord.get_DateRecord(year,month,day)
+
+    task = Task.objects.get(name=taskName)
+
+    return JsonResponse({
+        "task": taskName,
+        "year": year,
+        "month": month,
+        "day": day,
+        "d": str(dateRecord),
+    })

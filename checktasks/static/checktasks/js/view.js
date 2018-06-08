@@ -15,10 +15,17 @@ var viewer = {
         this.month = month;
         this.year = year;
         this.date = date;
+
+        this.start_date = new Date(year, month, 1);
+        this.end_date = new Date(year, month+1, 0);
     },
     year: null,
     month: null,
     date: null,
+
+    start_date: null,
+    end_date: null,
+
     get_element: function(element, type, identifier) {
         // type - element name, id, or $element
         // identifier - additional string added, ie # added at end.
@@ -65,6 +72,7 @@ var viewer = {
          */
         this.get_element("tasks-div", "$").empty();
     },
+
     make_tasks_table: function() {
         var $tasks_div = this.get_element("tasks-div", "$");
 
@@ -80,6 +88,7 @@ var viewer = {
         this.add_dateRow();
         tasks_functions.get_tasks(this.add_tasks);
     },
+
     add_tasks: function(tasks_list) {
         var tasks_length = tasks_list.length,
             $tbody = $("<tbody>");
@@ -119,13 +128,12 @@ var viewer = {
 
         this.set_date(year,month,date);
 
-        var lastDateObj = new Date(year, month+1, 0),
-            last_dateOfmonth = lastDateObj.getDate();
+        var last_dateOfmonth = this.end_date.getDate();
 
         this.table_columns = last_dateOfmonth + 1;
 
         var locale = "en-us",
-            monthString = lastDateObj.toLocaleString(locale, {month: "long" });
+            monthString = this.end_date.toLocaleString(locale, {month: "long" });
 
         var $table = this.get_element("table", "$");
         var $thead = $("<thead>");
@@ -163,7 +171,7 @@ var viewer = {
 
             tasks_functions.click(taskName, this.year, this.month, parseInt(dateCol) );
         }
-    }
+    },
 };
 
 var add_menu = {

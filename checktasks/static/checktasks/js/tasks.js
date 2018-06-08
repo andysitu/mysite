@@ -41,8 +41,21 @@ var tasks_functions = {
     click: function(taskName, year, month, date) {
         tasks_functions.csrf_it();
 
-        console.log(taskName, year, month, date);
-    }
+        $.ajax({
+            type: "POST",
+            url: click_ajax_url,
+            data: {
+                "task": taskName,
+                "year": year,
+                "month": month,
+                "day": date,
+            },
+            success: function (response) {
+                console.log(response);
+            }
+
+        });
+    },
 };
 
 class Task {

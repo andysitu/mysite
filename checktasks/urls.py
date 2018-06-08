@@ -8,5 +8,5 @@ urlpatterns = [
     path('add', views.add, name="add"),
 
     path('get_ajax_tasks', views.ajax_tasks, name="ajax_tasks"),
-    path('click_ajax', views.click_task, name="click_task_ajax"),
+    path('click_ajax', views.click_task_ajax, name="click_task_ajax"),
 ]
