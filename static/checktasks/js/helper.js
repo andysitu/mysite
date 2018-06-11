@@ -35,4 +35,9 @@ var helper = {
         stor.setItem("checkTasks_jdate", JSON.stringify({"date": date, "year": year, "month": month,}));
         stor.setItem(this.date_verName, this.date_version);
     },
+    setTodayDate: function() {
+        var t = new Date();
+        this.set_date(t.getFullYear(), t.getMonth(), t.getDate());
+
+    },
 };

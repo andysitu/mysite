@@ -27,12 +27,19 @@ var tasks_functions = {
             }
         });
     },
-    get_tasks: function(callback_function) {
+    get_tasks: function(callback_function, start_date, end_date) {
         tasks_functions.csrf_it();
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: get_tasksAjax_url,
-            data: {},
+            data: {
+                "start_year": start_date.getFullYear(),
+                "start_month": start_date.getMonth(),
+                "start_day": start_date.getDate(),
+                "end_year": end_date.getFullYear(),
+                "end_month": end_date.getMonth(),
+                "end_day": end_date.getDate(),
+            },
             success: function(data) {
                 callback_function(data);
             }

@@ -24,6 +24,7 @@ class DateRecord(models.Model):
             return d_daterecord
 
 class Task(models.Model):
+    type = "bool"
     name = models.CharField(max_length=30)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     completed_dates = models.ManyToManyField(DateRecord, blank=True)

@@ -86,7 +86,7 @@ var viewer = {
         $tasks_div.append($table);
 
         this.add_dateRow();
-        tasks_functions.get_tasks(this.add_tasks);
+        tasks_functions.get_tasks(this.add_tasks, this.start_date, this.end_date);
     },
 
     add_tasks: function(tasks_list) {
@@ -97,8 +97,12 @@ var viewer = {
         var $tr, $td, task, taskName,
             table_columns = viewer.table_columns;
 
+        var task_dic = null;
+
         for (var i = 0; i < tasks_length; i++) {
-            taskName = tasks_list[i];
+            task_dic = tasks_list[i]
+            taskName = task_dic.taskName;
+            console.log(task_dic);
             viewer.tasks.push(new Task(taskName));
 
             // Append tasks name column
@@ -116,9 +120,13 @@ var viewer = {
             }
             $tr.appendTo($tbody);
         }
+
+        console.log($tbody);
+        console.log($tasks_table);
         $tasks_table.append($tbody);
     },
     add_dateRow: function() {
+        helper.setTodayDate();
         var dateJSON = helper.get_date(),
             $thead, $tr, $th,
             i;
