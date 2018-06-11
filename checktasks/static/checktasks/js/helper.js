@@ -12,6 +12,13 @@ var helper = {
         return date_arr;
     },
 
+    get_num_days: function(start_date, end_date) {
+        var start_utc = Date.UTC(start_date.getFullYear(), start_date.getMonth(), start_date.getDate()),
+            end_utc = Date.UTC(end_date.getFullYear(), end_date.getMonth(), end_date.getDate());
+
+        return Math.floor((end_date - start_date) / (24 * 60 * 60 * 1000) + 1);
+    },
+
     date_verName: "dateVer",
     date_version: "0.0.2",
     get_date: function() {
@@ -37,7 +44,11 @@ var helper = {
     },
     setTodayDate: function() {
         var t = new Date();
+        console.log(t.getMonth());
         this.set_date(t.getFullYear(), t.getMonth(), t.getDate());
 
     },
+    get_date_string: function(year, month, date) {
+        return year + "_" + month + "_" + date;
+    }
 };

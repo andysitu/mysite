@@ -28,20 +28,22 @@ var tasks_functions = {
         });
     },
     get_tasks: function(callback_function, start_date, end_date) {
+
         tasks_functions.csrf_it();
         $.ajax({
             type: "POST",
             url: get_tasksAjax_url,
             data: {
                 "start_year": start_date.getFullYear(),
-                "start_month": start_date.getMonth(),
+                "start_month": start_date.getMonth() + 1,
                 "start_day": start_date.getDate(),
                 "end_year": end_date.getFullYear(),
-                "end_month": end_date.getMonth(),
+                "end_month": end_date.getMonth() + 1,
                 "end_day": end_date.getDate(),
             },
             success: function(data) {
-                callback_function(data);
+                console.log("Got TASKS:", data);
+                callback_function(data, start_date, end_date);
             }
         });
     },
@@ -54,7 +56,7 @@ var tasks_functions = {
             data: {
                 "task": taskName,
                 "year": year,
-                "month": month,
+                "month": month + 1,
                 "day": date,
             },
             success: function (response) {

@@ -26,7 +26,7 @@ var viewer = {
     start_date: null,
     end_date: null,
 
-    get_element: function(element, type, identifier) {
+    get_element_name: function(element, type, identifier) {
         // type - element name, id, or $element
         // identifier - additional string added, ie # added at end.
         switch(element) {
@@ -70,14 +70,14 @@ var viewer = {
         /**
          * Remove tasks from #tasks_div & classes
          */
-        this.get_element("tasks-div", "$").empty();
+        this.get_element_name("tasks-div", "$").empty();
     },
 
     make_tasks_table: function() {
-        var $tasks_div = this.get_element("tasks-div", "$");
+        var $tasks_div = this.get_element_name("tasks-div", "$");
 
         var $table = $("<table>", {
-            id: this.get_element("table", "id"),
+            id: this.get_element_name("table", "id"),
             "class": "table table-sm",
         });
 
@@ -89,20 +89,22 @@ var viewer = {
         tasks_functions.get_tasks(this.add_tasks, this.start_date, this.end_date);
     },
 
-    add_tasks: function(tasks_list) {
+    add_tasks: function(tasks_list, start_date, end_date) {
         var tasks_length = tasks_list.length,
             $tbody = $("<tbody>");
 
-        var $tasks_table = viewer.get_element("table", "$");
+        var $tasks_table = viewer.get_element_name("table", "$");
         var $tr, $td, task, taskName,
             table_columns = viewer.table_columns;
 
-        var task_dic = null;
+        var task_dic = null, taskName=null, taskType=null,
+            numDays = helper.get_num_days(start_date, end_date),
+            col_num = 1;
 
         for (var i = 0; i < tasks_length; i++) {
-            task_dic = tasks_list[i]
+            task_dic = tasks_list[i];
             taskName = task_dic.taskName;
-            console.log(task_dic);
+            taskType = taskName.taskTake;
             viewer.tasks.push(new Task(taskName));
 
             // Append tasks name column
@@ -113,20 +115,38 @@ var viewer = {
             }));
 
             // Append rest of tasks row
-            for (var j = 1; j < table_columns; j++) {
-                $td = $("<td>", {
-                    id: viewer.get_element("tasks-td", "id", taskName + "-" + j),
-                }).appendTo($tr);
+            for (col_num = 1; col_num < numDays + 1; col_num++) {
+                var new_date = new Date(start_date);
+                new_date.setDate(new_date.getDate() + col_num - 1);
+
+                var y = new_date.getFullYear(),
+                    m = new_date.getMonth()+1,
+                    d = new_date.getDate(),
+                    value = 0,
+                    date_string = helper.get_date_string(y, m, d);
+
+                if (date_string in task_dic.dates)
+                    value = task_dic["dates"][date_string];
+
+                var $td = viewer.make_table_$td(taskName,taskType,col_num,value);
+                $tr.append($td);
             }
             $tr.appendTo($tbody);
         }
 
-        console.log($tbody);
-        console.log($tasks_table);
         $tasks_table.append($tbody);
     },
+    make_table_$td: function(taskName,taskType,col_num,value) {
+        $td = $("<td>", {
+            id: viewer.get_element_name("tasks-td", "id", taskName + "-" + col_num),
+        }).append(value);
+
+        return $td;
+    },
+
     add_dateRow: function() {
         helper.setTodayDate();
+
         var dateJSON = helper.get_date(),
             $thead, $tr, $th,
             i;
@@ -143,7 +163,7 @@ var viewer = {
         var locale = "en-us",
             monthString = this.end_date.toLocaleString(locale, {month: "long" });
 
-        var $table = this.get_element("table", "$");
+        var $table = this.get_element_name("table", "$");
         var $thead = $("<thead>");
 
         $tr = $("<tr>");
@@ -157,7 +177,7 @@ var viewer = {
                 $("<th>", {
                     text: i,
                     scope: "col",
-                    id: viewer.get_element("date-th", "id", i),}
+                    id: viewer.get_element_name("date-th", "id", i),}
                 ));
         }
 
@@ -170,7 +190,7 @@ var viewer = {
             eleType = target.nodeName;
 
         if (eleType == "TD") {
-            var td_prefix_name = viewer.get_element("tasks-td", "id", ""),
+            var td_prefix_name = viewer.get_element_name("tasks-td", "id", ""),
                 re = new RegExp(td_prefix_name + '(.+)-(\\d+)');
 
             var reResults = re.exec(target.id),

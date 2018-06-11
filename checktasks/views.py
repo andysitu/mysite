@@ -62,13 +62,15 @@ def ajax_tasks(request):
     start_day = int(request.POST.get("start_day"))
     end_day = int(request.POST.get("end_day"))
 
-    print(end_year, end_month, end_day)
-
     start_date = datetime.date(start_year, start_month, start_day)
     end_date = datetime.date(end_year, end_month, end_day)
 
+    print(start_date)
+    print(end_date)
+
     for task in tasks:
         dates_dic = {}
+        idt = task.id
 
         dates_q = DateRecord.objects.filter(task=task).filter(date__gte=start_date,
                                                               date__lte=end_date)
@@ -78,7 +80,7 @@ def ajax_tasks(request):
 
         tasks_list.append({
             "taskName": task.name,
-            "type": task.type,
+            "taskType": task.type,
             "dates": dates_dic,
         })
 
@@ -94,6 +96,7 @@ def click_task_ajax(request):
     dateRecord = DateRecord.get_DateRecord(year,month,day)
 
     task = Task.objects.get(name=taskName)
+    task.completed_dates.add(dateRecord)
 
     return JsonResponse({
         "task": taskName,
