@@ -44,7 +44,6 @@ var helper = {
     },
     setTodayDate: function() {
         var t = new Date();
-        console.log(t.getMonth());
         this.set_date(t.getFullYear(), t.getMonth(), t.getDate());
 
     },

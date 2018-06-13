@@ -104,7 +104,7 @@ var viewer = {
         for (var i = 0; i < tasks_length; i++) {
             task_dic = tasks_list[i];
             taskName = task_dic.taskName;
-            taskType = taskName.taskTake;
+            taskType = task_dic.taskType;
             viewer.tasks.push(new Task(taskName));
 
             // Append tasks name column
@@ -137,10 +137,13 @@ var viewer = {
         $tasks_table.append($tbody);
     },
     make_table_$td: function(taskName,taskType,col_num,value) {
-        $td = $("<td>", {
+        var $td = $("<td>", {
             id: viewer.get_element_name("tasks-td", "id", taskName + "-" + col_num),
-        }).append(value);
-
+        });
+        if (taskType == "bool") {
+            if (value)
+                $td.addClass("boolOn");
+        }
         return $td;
     },
 

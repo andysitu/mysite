@@ -1,3 +1,7 @@
 td:hover {
     background-color: papayawhip;
 }
+
+.boolOn {
+    background-color: lightgreen;
+}
