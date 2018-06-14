@@ -1,0 +1,122 @@
+warning: CRLF will be replaced by LF in checktasks/static/checktasks/js/helper.js.
+The file will have its original line endings in your working directory.
+warning: CRLF will be replaced by LF in checktasks/static/checktasks/js/tasks.js.
+The file will have its original line endings in your working directory.
+warning: CRLF will be replaced by LF in checktasks/static/checktasks/js/view.js.
+The file will have its original line endings in your working directory.
+warning: CRLF will be replaced by LF in checktasks/utils.py.
+The file will have its original line endings in your working directory.
+[1mdiff --git a/checktasks/static/checktasks/js/tasks.js b/checktasks/static/checktasks/js/tasks.js[m
+[1mindex 5103e76..b91bd2d 100644[m
+[1m--- a/checktasks/static/checktasks/js/tasks.js[m
+[1m+++ b/checktasks/static/checktasks/js/tasks.js[m
+[36m@@ -47,6 +47,9 @@[m [mvar tasks_functions = {[m
+             }[m
+         });[m
+     },[m
+[32m+[m[32m    get_task: function() {[m
+[32m+[m
+[32m+[m[32m    },[m
+     click: function(taskName, year, month, date) {[m
+         tasks_functions.csrf_it();[m
+ [m
+[1mdiff --git a/checktasks/utils.py b/checktasks/utils.py[m
+[1mindex cd8f31b..e459491 100644[m
+[1m--- a/checktasks/utils.py[m
+[1m+++ b/checktasks/utils.py[m
+[36m@@ -10,4 +10,32 @@[m [mdef get_DateRecord(year, month, day):[m
+     else:[m
+         d_date = datetime.day(year,month,day)[m
+         d_daterecord = DateRecord(date=d)[m
+[31m-        d_daterecord.save()[m
+\ No newline at end of file[m
+[32m+[m[32m        d_daterecord.save()[m
+[32m+[m
+[32m+[m[32mdef get_task(task_name, user, start_date, end_date):[m
+[32m+[m[32m    """[m
+[32m+[m[32m    :param task_name: String of task Name[m
+[32m+[m[32m    :param user: Request.User[m
+[32m+[m[32m    :param start_date: datetime of first start[m
+[32m+[m[32m    :param end_date: datetime of end date[m
+[32m+[m[32m    :return: {[m
+[32m+[m[32m        "taskName": [string],[m
+[32m+[m[32m        "taskType": [string],[m
+[32m+[m[32m        "dates': { [yyyy]_[mm]_[dd]: value }[m
+[32m+[m[32m    }[m
+[32m+[m[32m    """[m
+[32m+[m[32m    task = Task.objects.get(name=task_name, user=user)[m
+[32m+[m[32m    dates_dic = {}[m
+[32m+[m[32m    dates_q = DateRecord.objects.filter(task=task).filter(date__gte=start_date,[m
+[32m+[m[32m                                                          date__lte=end_date)[m
+[32m+[m[32m    for d in dates_q:[m
+[32m+[m[32m        date_string = str(d)[m
+[32m+[m[32m        dates_dic[date_string] = 1[m
+[32m+[m
+[32m+[m[32m    task_dic = {[m
+[32m+[m[32m        "taskName": task.name,[m
+[32m+[m[32m        "taskType": task.type,[m
+[32m+[m[32m        "dates": dates_dic,[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    return task_dic[m
+\ No newline at end of file[m
+[1mdiff --git a/checktasks/views.py b/checktasks/views.py[m
+[1mindex d5b56c8..120f695 100644[m
+[1m--- a/checktasks/views.py[m
+[1m+++ b/checktasks/views.py[m
+[36m@@ -4,6 +4,8 @@[m [mfrom django.http import HttpResponse, HttpResponseRedirect, JsonResponse[m
+ from .models import Task, DateRecord[m
+ import datetime[m
+ [m
+[32m+[m[32mfrom .utils import get_task[m
+[32m+[m
+ def view_tasks(request):[m
+     if not request.user.is_authenticated:[m
+         return HttpResponseRedirect(reverse('login'))[m
+[36m@@ -44,9 +46,19 @@[m [mdef add(request):[m
+ [m
+     return JsonResponse({})[m
+ [m
+[32m+[m[32mdef ajax_task(request):[m
+[32m+[m[32m    """[m
+[32m+[m[32m    Retrieve information for 1 task for an user[m
+[32m+[m[32m    :param request:[m
+[32m+[m[32m    :return:[m
+[32m+[m[32m    """[m
+[32m+[m[32m    task_dic = {}[m
+[32m+[m[32m    user = request.user[m
+[32m+[m
+[32m+[m
+ def ajax_tasks(request):[m
+     """[m
+[31m-        Retrieves all of the tasks for a particular user.[m
+[32m+[m[32m        Retrieves all of the tasks for an user.[m
+         :param user: request.user[m
+         :return: lists containing all of Tasks for that user[m
+     """[m
+[36m@@ -65,12 +77,8 @@[m [mdef ajax_tasks(request):[m
+     start_date = datetime.date(start_year, start_month, start_day)[m
+     end_date = datetime.date(end_year, end_month, end_day)[m
+ [m
+[31m-    print(start_date)[m
+[31m-    print(end_date)[m
+[31m-[m
+     for task in tasks:[m
+         dates_dic = {}[m
+[31m-        idt = task.id[m
+ [m
+         dates_q = DateRecord.objects.filter(task=task).filter(date__gte=start_date,[m
+                                                               date__lte=end_date)[m
+[36m@@ -78,11 +86,7 @@[m [mdef ajax_tasks(request):[m
+             date_string = str(d)[m
+             dates_dic[date_string] = 1[m
+ [m
+[31m-        tasks_list.append({[m
+[31m-            "taskName": task.name,[m
+[31m-            "taskType": task.type,[m
+[31m-            "dates": dates_dic,[m
+[31m-        })[m
+[32m+[m[32m        tasks_list.append(get_task(task_name, user, start_date, end_date))[m
+ [m
+     return JsonResponse(tasks_list, safe=False)[m
+ [m

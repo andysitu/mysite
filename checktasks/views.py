@@ -46,11 +46,10 @@ def add(request):
 
 def ajax_tasks(request):
     """
-        Retrieves all of the tasks for a particular user.
+        Retrieves all of the tasks for an user.
         :param user: request.user
         :return: lists containing all of Tasks for that user
     """
-
     tasks_list = []
     user = request.user
     tasks = Task.objects.filter(user=user)
@@ -65,27 +64,10 @@ def ajax_tasks(request):
     start_date = datetime.date(start_year, start_month, start_day)
     end_date = datetime.date(end_year, end_month, end_day)
 
-    print(start_date)
-    print(end_date)
-
     for task in tasks:
-        dates_dic = {}
-        idt = task.id
-
-        dates_q = DateRecord.objects.filter(task=task).filter(date__gte=start_date,
-                                                              date__lte=end_date)
-        for d in dates_q:
-            date_string = str(d)
-            dates_dic[date_string] = 1
-
-        tasks_list.append({
-            "taskName": task.name,
-            "taskType": task.type,
-            "dates": dates_dic,
-        })
+        tasks_list.append( task.make_task_dic(start_date, end_date) )
 
     return JsonResponse(tasks_list, safe=False)
-
 
 def click_task_ajax(request):
     taskName = request.POST.get("task")
@@ -96,12 +78,14 @@ def click_task_ajax(request):
     dateRecord = DateRecord.get_DateRecord(year,month,day)
 
     task = Task.objects.get(name=taskName)
-    task.completed_dates.add(dateRecord)
+    taskType = task.type
+    response = task.click(year, month, day)
 
     return JsonResponse({
         "task": taskName,
+        "type": taskType,
         "year": year,
         "month": month,
         "day": day,
-        "d": str(dateRecord),
+        "value": response,
     })

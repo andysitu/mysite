@@ -47,7 +47,10 @@ var tasks_functions = {
             }
         });
     },
-    click: function(taskName, year, month, date) {
+    get_task: function() {
+
+    },
+    click: function(taskName, year, month, date, td_replacer) {
         tasks_functions.csrf_it();
 
         $.ajax({
@@ -60,7 +63,7 @@ var tasks_functions = {
                 "day": date,
             },
             success: function (response) {
-                console.log(response);
+                td_replacer(response);
             }
 
         });

@@ -11,6 +11,8 @@ $(document).ready(function(){
 });
 
 var viewer = {
+    _taskName_map: [],
+    _date_map: [],
     set_date: function(year, month, date) {
         this.month = month;
         this.year = year;
@@ -29,6 +31,8 @@ var viewer = {
     get_element_name: function(element, type, identifier) {
         // type - element name, id, or $element
         // identifier - additional string added, ie # added at end.
+        if (typeof(identifier) == "string")
+            identifier = identifier.replace(" ", "_");
         switch(element) {
             case "table":
                 if (type == "$")
@@ -88,6 +92,38 @@ var viewer = {
         this.add_dateRow();
         tasks_functions.get_tasks(this.add_tasks, this.start_date, this.end_date);
     },
+
+    add_task: function(task_dic, start_date, end_date) {
+        task_dic = tasks_list[i];
+            taskName = task_dic.taskName;
+            taskType = task_dic.taskType;
+            viewer.tasks.push(new Task(taskName));
+
+            // Append tasks name column
+            $tr = $("<tr>");
+            $tr.append($("<th>", {
+                text: taskName,
+                scope: "row",
+            }));
+
+            // Append rest of tasks row
+            for (col_num = 1; col_num < numDays + 1; col_num++) {
+                var new_date = new Date(start_date);
+                new_date.setDate(new_date.getDate() + col_num - 1);
+
+                var y = new_date.getFullYear(),
+                    m = new_date.getMonth()+1,
+                    d = new_date.getDate(),
+                    value = 0,
+                    date_string = helper.get_date_string(y, m, d);
+
+                if (date_string in task_dic.dates)
+                    value = task_dic["dates"][date_string];
+
+                var $td = viewer.make_table_$td(taskName,taskType,col_num,value);
+                $tr.append($td);
+            }
+    }
 
     add_tasks: function(tasks_list, start_date, end_date) {
         var tasks_length = tasks_list.length,
@@ -200,9 +236,22 @@ var viewer = {
                 taskName = reResults[1],
                 dateCol = reResults[2];
 
-            tasks_functions.click(taskName, this.year, this.month, parseInt(dateCol) );
+            var td_replacer = this.get_td_replacer(e.target.id);
+
+            tasks_functions.click(taskName, this.year, this.month, parseInt(dateCol), td_replacer );
         }
     },
+    get_td_replacer: function(td_id, ) {
+        return function(response_dict) {
+            var col_num = /-(\d+)$/.exec(td_id)[1];
+
+            var new_td = viewer.make_table_$td(response_dict.task, response_dict.type, col_num,response_dict.value);
+            console.log(new_td);
+            console.log(td_id);
+            console.log($("#" + td_id))
+            $("#" + td_id).replaceWith(new_td);
+        };
+    }
 };
 
 var add_menu = {

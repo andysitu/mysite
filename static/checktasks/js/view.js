@@ -29,6 +29,8 @@ var viewer = {
     get_element_name: function(element, type, identifier) {
         // type - element name, id, or $element
         // identifier - additional string added, ie # added at end.
+        if (typeof(identifier) == "string")
+            identifier = identifier.replace(" ", "_");
         switch(element) {
             case "table":
                 if (type == "$")
@@ -200,9 +202,22 @@ var viewer = {
                 taskName = reResults[1],
                 dateCol = reResults[2];
 
-            tasks_functions.click(taskName, this.year, this.month, parseInt(dateCol) );
+            var td_replacer = this.get_td_replacer(e.target.id);
+
+            tasks_functions.click(taskName, this.year, this.month, parseInt(dateCol), td_replacer );
         }
     },
+    get_td_replacer: function(td_id, ) {
+        return function(response_dict) {
+            var col_num = /-(\d+)$/.exec(td_id)[1];
+
+            var new_td = viewer.make_table_$td(response_dict.task, response_dict.type, col_num,response_dict.value);
+            console.log(new_td);
+            console.log(td_id);
+            console.log($("#" + td_id))
+            $("#" + td_id).replaceWith(new_td);
+        };
+    }
 };
 
 var add_menu = {
