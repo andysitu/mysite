@@ -210,6 +210,7 @@ var viewer = {
             var td_prefix_name = viewer.get_element_name("tasks-td", "id", ""),
                 re = new RegExp(td_prefix_name + '(\\d+)-(\\d+)');
 
+
             var reResults = re.exec(target.id),
                 task_row_num = reResults[1],
                 taskName = viewer._taskName_map[task_row_num],
@@ -222,12 +223,12 @@ var viewer = {
     },
     get_td_replacer: function(td_id, ) {
         return function(response_dict) {
-            var col_num = /-(\d+)$/.exec(td_id)[1];
+                var reResults = /(\d+)-(\d+)$/.exec(td_id);
 
-            var new_td = viewer.make_table_$td(response_dict.task, response_dict.type, col_num,response_dict.value);
-            console.log(new_td);
-            console.log(td_id);
-            console.log($("#" + td_id))
+                var task_row_num = reResults[1],
+                    col_num = reResults[2];
+
+            var new_td = viewer.make_table_$td(task_row_num, response_dict.type, col_num, response_dict.value);
             $("#" + td_id).replaceWith(new_td);
         };
     }
