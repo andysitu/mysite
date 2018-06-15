@@ -11,6 +11,8 @@ $(document).ready(function(){
 });
 
 var viewer = {
+    _taskName_map: [],
+    _date_map: [],
     set_date: function(year, month, date) {
         this.month = month;
         this.year = year;
@@ -88,10 +90,45 @@ var viewer = {
         $tasks_div.append($table);
 
         this.add_dateRow();
-        tasks_functions.get_tasks(this.add_tasks, this.start_date, this.end_date);
+        tasks_functions.get_tasks(this.add_tasks.bind(this), this.start_date, this.end_date);
     },
 
-    add_tasks: function(tasks_list, start_date, end_date) {
+    add_task: function(task_dic, numDays) {
+        var taskName = task_dic.taskName,
+            taskType = task_dic.taskType,
+            start_date = this.start_date,
+            end_date = this.end;
+
+        this._taskName_map.push(taskName);
+
+        // Append tasks name column
+        $tr = $("<tr>");
+        $tr.append($("<th>", {
+            text: taskName,
+            scope: "row",
+        }));
+
+        // Append rest of tasks row
+        for (var col_num = 1; col_num < numDays + 1; col_num++) {
+            var new_date = new Date(start_date);
+            new_date.setDate(new_date.getDate() + col_num - 1);
+
+            var y = new_date.getFullYear(),
+                m = new_date.getMonth()+1,
+                d = new_date.getDate(),
+                value = 0,
+                date_string = helper.get_date_string(y, m, d);
+
+            if (date_string in task_dic.dates)
+                value = task_dic["dates"][date_string];
+
+            var $td = viewer.make_table_$td(taskName,taskType,col_num,value);
+            $tr.append($td);
+        }
+        return $tr;
+    },
+
+    add_tasks: function(tasks_list) {
         var tasks_length = tasks_list.length,
             $tbody = $("<tbody>");
 
@@ -100,39 +137,12 @@ var viewer = {
             table_columns = viewer.table_columns;
 
         var task_dic = null, taskName=null, taskType=null,
-            numDays = helper.get_num_days(start_date, end_date),
+            numDays = helper.get_num_days(this.start_date, this.end_date),
             col_num = 1;
 
         for (var i = 0; i < tasks_length; i++) {
             task_dic = tasks_list[i];
-            taskName = task_dic.taskName;
-            taskType = task_dic.taskType;
-            viewer.tasks.push(new Task(taskName));
-
-            // Append tasks name column
-            $tr = $("<tr>");
-            $tr.append($("<th>", {
-                text: taskName,
-                scope: "row",
-            }));
-
-            // Append rest of tasks row
-            for (col_num = 1; col_num < numDays + 1; col_num++) {
-                var new_date = new Date(start_date);
-                new_date.setDate(new_date.getDate() + col_num - 1);
-
-                var y = new_date.getFullYear(),
-                    m = new_date.getMonth()+1,
-                    d = new_date.getDate(),
-                    value = 0,
-                    date_string = helper.get_date_string(y, m, d);
-
-                if (date_string in task_dic.dates)
-                    value = task_dic["dates"][date_string];
-
-                var $td = viewer.make_table_$td(taskName,taskType,col_num,value);
-                $tr.append($td);
-            }
+            $tr = this.add_task(task_dic, numDays);
             $tr.appendTo($tbody);
         }
 
