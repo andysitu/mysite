@@ -153,9 +153,13 @@ var viewer = {
         var $td = $("<td>", {
             id: viewer.get_element_name("tasks-td", "id", task_row_num + "-" + col_num),
         });
+        if (value) {
+            $td.addClass("active");
+        }
         if (taskType == "bool") {
-            if (value)
+            if (value) {
                 $td.addClass("boolOn");
+            }
         }
         return $td;
     },

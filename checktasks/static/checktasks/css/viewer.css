@@ -1,7 +1,11 @@
-td:hover {
-    background-color: papayawhip;
+.boolOn {
+    background-color: limegreen;
 }
 
-.boolOn {
+td.active:hover {
     background-color: lightgreen;
+}
+
+td:not(.active):hover {
+    background-color: papayawhip;
 }
