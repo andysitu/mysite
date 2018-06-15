@@ -74,6 +74,7 @@ var viewer = {
         /**
          * Remove tasks from #tasks_div & classes
          */
+        this._taskName_map = [];
         this.get_element_name("tasks-div", "$").empty();
     },
 
@@ -93,7 +94,7 @@ var viewer = {
         tasks_functions.get_tasks(this.add_tasks.bind(this), this.start_date, this.end_date);
     },
 
-    add_task: function(task_dic, numDays) {
+    add_task: function(task_dic, task_row_num, numDays) {
         var taskName = task_dic.taskName,
             taskType = task_dic.taskType,
             start_date = this.start_date,
@@ -122,7 +123,7 @@ var viewer = {
             if (date_string in task_dic.dates)
                 value = task_dic["dates"][date_string];
 
-            var $td = viewer.make_table_$td(taskName,taskType,col_num,value);
+            var $td = viewer.make_table_$td(task_row_num,taskType,col_num,value);
             $tr.append($td);
         }
         return $tr;
@@ -140,17 +141,17 @@ var viewer = {
             numDays = helper.get_num_days(this.start_date, this.end_date),
             col_num = 1;
 
-        for (var i = 0; i < tasks_length; i++) {
-            task_dic = tasks_list[i];
-            $tr = this.add_task(task_dic, numDays);
+        for (var task_row_num = 0; task_row_num < tasks_length; task_row_num++) {
+            task_dic = tasks_list[task_row_num];
+            $tr = this.add_task(task_dic, task_row_num, numDays);
             $tr.appendTo($tbody);
         }
 
         $tasks_table.append($tbody);
     },
-    make_table_$td: function(taskName,taskType,col_num,value) {
+    make_table_$td: function(task_row_num,taskType,col_num,value) {
         var $td = $("<td>", {
-            id: viewer.get_element_name("tasks-td", "id", taskName + "-" + col_num),
+            id: viewer.get_element_name("tasks-td", "id", task_row_num + "-" + col_num),
         });
         if (taskType == "bool") {
             if (value)
@@ -188,6 +189,7 @@ var viewer = {
         }));
 
         for (i = 1; i <last_dateOfmonth+1; i++) {
+            this._date_map.push(year + "_" + month + "_" + i);
             $tr.append(
                 $("<th>", {
                     text: i,
@@ -206,10 +208,11 @@ var viewer = {
 
         if (eleType == "TD") {
             var td_prefix_name = viewer.get_element_name("tasks-td", "id", ""),
-                re = new RegExp(td_prefix_name + '(.+)-(\\d+)');
+                re = new RegExp(td_prefix_name + '(\\d+)-(\\d+)');
 
             var reResults = re.exec(target.id),
-                taskName = reResults[1],
+                task_row_num = reResults[1],
+                taskName = viewer._taskName_map[task_row_num],
                 dateCol = reResults[2];
 
             var td_replacer = this.get_td_replacer(e.target.id);
