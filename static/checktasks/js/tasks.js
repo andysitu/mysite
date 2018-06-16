@@ -28,7 +28,6 @@ var tasks_functions = {
         });
     },
     get_tasks: function(callback_function, start_date, end_date) {
-
         tasks_functions.csrf_it();
         $.ajax({
             type: "POST",
