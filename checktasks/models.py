@@ -26,8 +26,8 @@ class DateRecord(models.Model):
 class Task(models.Model):
     type = "bool"
     name = models.CharField(max_length=30)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    completed_dates = models.ManyToManyField(DateRecord, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    completed_dates = models.ForeignKey(DateRecord, on_delete=models.CASCADE, blank=True, null=True)
 
     def click(self, year, month, day):
         d = DateRecord.get_DateRecord(year,month,day)
