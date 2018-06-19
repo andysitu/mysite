@@ -103,11 +103,16 @@ var viewer = {
         this._taskName_map.push(taskName);
 
         // Append tasks name column
-        $tr = $("<tr>");
-        $tr.append($("<th>", {
-            text: taskName,
-            scope: "row",
-        }));
+        var $tr = $("<tr>"),
+            $th = $("<th>", {
+                scope: "row",
+            });
+        $tr.append($th);
+
+
+        var $button_div = this.make_task_dropdown(task_row_num)
+        $th.append($button_div);
+
 
         // Append rest of tasks row
         for (var col_num = 1; col_num < numDays + 1; col_num++) {
@@ -163,6 +168,42 @@ var viewer = {
         }
         return $td;
     },
+    make_task_dropdown: function(task_row_num) {
+        var $button_div = $("<div class='dropdown'></div>"),
+            taskName = this._taskName_map[task_row_num];
+
+        $("<button>", {
+            "class": "btn btn-link dropdown-toggle",
+            type: "button",
+            text: taskName,
+            id: "taskButton-" + task_row_num,
+            "data-toggle": "dropdown",
+            "aria-haspopup": true,
+            "aria-expanded": false,
+        }).appendTo($button_div);
+
+        var $dropdown_div = $("<div>", {
+            "class": "dropdown-menu",
+            "aria-labelledby": "taskButton-" + task_row_num,
+        }).appendTo($button_div);
+
+        function delete_task(e) {
+            e.preventDefault();
+            var del_msg = "Are you sure you want to delete task " + taskName + "?";
+            result = window.confirm(del_msg);
+            if (response) {
+                tasks_functions.del_task(taskName);
+            }
+        }
+
+        $("<a>", {
+            "class": "dropdown-item",
+            text: "Delete",
+            click: delete_task
+        }).appendTo($dropdown_div);
+
+        return $button_div;
+    },
 
     add_dateRow: function() {
         helper.setTodayDate();
@@ -170,6 +211,7 @@ var viewer = {
         var dateJSON = helper.get_date(),
             $thead, $tr, $th,
             i;
+
         var month = dateJSON.month,
             year = dateJSON.year,
             date = dateJSON.date;
@@ -294,23 +336,6 @@ var add_menu = {
             name: "name",
         }).appendTo($div);
         $form.append($div);
-
-        // // Text Area for Description
-        // $div = $("<div class='form-group row'></div>");
-        // $("<label>", {
-        //     "for": this.index.description_textarea,
-        //     "class": "col-form-label col-sm-2",
-        //     "text": "Description",
-        // }).appendTo($div);
-        //
-        // $("<textarea>", {
-        //     "class": "form-control col-sm-8",
-        //     name: this.index.description,
-        //     id: this.index.description_textarea,
-        //     rows: 4,
-        // }).appendTo($div);
-        //
-        // $form.append($div);
 
         // Submit Button
         $("<button/>", {

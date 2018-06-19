@@ -20,7 +20,7 @@ var helper = {
     },
 
     date_verName: "dateVer",
-    date_version: "0.0.3",
+    date_version: "0.0.4",
     get_date: function() {
 
         var stor = window.localStorage;

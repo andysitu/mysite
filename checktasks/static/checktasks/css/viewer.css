@@ -9,3 +9,4 @@ td.active:hover {
 td:not(.active):hover {
     background-color: papayawhip;
 }
+

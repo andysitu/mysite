@@ -75,8 +75,6 @@ def click_task_ajax(request):
     month = int(request.POST.get("month"))
     day = int(request.POST.get("day"))
 
-    dateRecord = DateRecord.get_DateRecord(year,month,day)
-
     task = Task.objects.get(name=taskName)
     taskType = task.type
     response = task.click(year, month, day)
@@ -89,3 +87,10 @@ def click_task_ajax(request):
         "day": day,
         "value": response,
     })
+
+def del_task_ajax(request):
+    taskName = request.POST.get("task")
+    t = Task.objects.get(name=taskName)
+    t.delete()
+
+    return JsonResponse({})

@@ -51,7 +51,7 @@ var tasks_functions = {
     },
     click: function(taskName, year, month, date, td_replacer) {
         tasks_functions.csrf_it();
-
+        
         $.ajax({
             type: "POST",
             url: click_ajax_url,
@@ -65,6 +65,20 @@ var tasks_functions = {
                 td_replacer(response);
             }
 
+        });
+    },
+    del_task: function(taskName) {
+        tasks_functions.csrf_it();
+
+        $.ajax({
+            type: "POST",
+            url: del_url,
+            data: {
+                "task": taskName,
+            },
+            success: function(response) {
+                console.log("Deleted Task: " + taskName);
+            }
         });
     },
 };

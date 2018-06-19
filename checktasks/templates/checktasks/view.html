@@ -4,9 +4,10 @@
 
 {% block js %}
 {% csrf_token %}
+<script type="text/javascript" src="{% static 'checktasks/js/tasks.js' %}"></script>
 <script type="text/javascript" src="{% static 'checktasks/js/helper.js' %}"></script>
 <script type="text/javascript" src="{% static 'checktasks/js/view.js' %}"></script>
-<script type="text/javascript" src="{% static 'checktasks/js/tasks.js' %}"></script>
+
 
 <link href="{% static 'checktasks/css/viewer.css' %}" type="text/css" rel="stylesheet" />
 
@@ -15,7 +16,8 @@
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
     var get_tasksAjax_url = "{% url 'checktasks:ajax_tasks' %}",
-        click_ajax_url = "{% url 'checktasks:click_task_ajax' %}";
+        click_ajax_url = "{% url 'checktasks:click_task_ajax' %}",
+        del_url = "{% url 'checktasks:del_task_ajax' %}";
 </script>
 {% endblock %}
 
