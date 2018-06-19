@@ -67,7 +67,7 @@ var tasks_functions = {
 
         });
     },
-    del_task: function(taskName) {
+    del_task: function(taskName, task_tr_id) {
         tasks_functions.csrf_it();
 
         $.ajax({
@@ -77,7 +77,7 @@ var tasks_functions = {
                 "task": taskName,
             },
             success: function(response) {
-                console.log("Deleted Task: " + taskName);
+                $("#" + task_tr_id).remove();
             }
         });
     },

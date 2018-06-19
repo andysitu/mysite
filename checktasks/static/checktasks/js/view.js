@@ -103,7 +103,9 @@ var viewer = {
         this._taskName_map.push(taskName);
 
         // Append tasks name column
-        var $tr = $("<tr>"),
+        var $tr = $("<tr>", {
+                id: "tr-" + task_row_num,
+            }),
             $th = $("<th>", {
                 scope: "row",
             });
@@ -192,7 +194,7 @@ var viewer = {
             var del_msg = "Are you sure you want to delete task " + taskName + "?";
             confirm = window.confirm(del_msg);
             if (confirm) {
-                tasks_functions.del_task(taskName);
+                tasks_functions.del_task(taskName, "tr-" + task_row_num);
             }
         }
 
