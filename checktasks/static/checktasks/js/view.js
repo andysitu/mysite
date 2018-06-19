@@ -190,8 +190,8 @@ var viewer = {
         function delete_task(e) {
             e.preventDefault();
             var del_msg = "Are you sure you want to delete task " + taskName + "?";
-            result = window.confirm(del_msg);
-            if (response) {
+            confirm = window.confirm(del_msg);
+            if (confirm) {
                 tasks_functions.del_task(taskName);
             }
         }
