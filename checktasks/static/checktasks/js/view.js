@@ -4,7 +4,10 @@ $(document).ready(function(){
     });
 
     $('.overlay').click(function() {
-        add_menu.close_menu();
+        if (add_menu.status) {
+            add_menu.close_menu();
+        }
+
     });
 
     viewer.make_tasks_table();

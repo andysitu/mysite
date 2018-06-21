@@ -1,4 +1,5 @@
 var add_menu = {
+    status: false,
     index: {
         form_id: "add-form",
         name: "name",
@@ -17,6 +18,7 @@ var add_menu = {
         tasks_functions.add($add_form, run_on_success);
     },
     create_menu: function() {
+        this.status = true;
         var $menu_option_div = $( '#menu-option-div' );
 
         $menu_option_div.empty();
@@ -27,6 +29,7 @@ var add_menu = {
         $('.overlay').show();
     },
     close_menu: function() {
+        this.status = false;
         $( '#menu-option-div' ).hide();
         $('.overlay').hide()
     },
