@@ -5,7 +5,6 @@ var add_menu = {
         name_input_element: "name_input",
         description: "description",
         description_textarea: "description_text",
-
     },
     submitter: function(e) {
         e.preventDefault();
@@ -39,6 +38,8 @@ var add_menu = {
             submit: this.submitter,
         });
 
+        var type_select_id = "type-select";
+
         var $div;
 
         // Name Input
@@ -50,9 +51,30 @@ var add_menu = {
 
         $("<input/>", {
             id: this.index.name_input_element,
-            "class": "col-sm-4 form-control",
+            "class": "col-sm-6 form-control",
             name: "name",
         }).appendTo($div);
+
+        $form.append($div);
+
+        $div = $("<div class='form-group row'></div>");
+
+        $("<label>", {
+            "class": "col-sm-2 col-form-label",
+            "for": type_select_id,
+        }).text("Type").appendTo($div);
+
+        var $type_select = $("<select>", {
+            id: type_select_id,
+            "class": "form-control col-sm-6",
+        }).appendTo($div);
+
+
+        $("<option>", {
+            name: "bool",
+            text: "Start Once",
+        }).appendTo($type_select)
+
         $form.append($div);
 
         // Submit Button
@@ -73,4 +95,8 @@ var add_menu = {
 
         return $form;
     },
-}
+};
+
+var edit_menu = {
+
+};
