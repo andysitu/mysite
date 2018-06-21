@@ -37,8 +37,11 @@ def add(request):
     user = request.user
     if request.method == "POST":
         name = request.POST.get("name")
-        task = Task(name=name, user=user)
-        task.save()
+        type = request.POST.get("type")
+
+        if type == "bool":
+            task = Task(name=name, user=user)
+            task.save()
 
         return JsonResponse({"name": name})
 

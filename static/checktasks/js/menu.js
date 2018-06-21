@@ -67,11 +67,12 @@ var add_menu = {
         var $type_select = $("<select>", {
             id: type_select_id,
             "class": "form-control col-sm-6",
+            name: "type",
         }).appendTo($div);
 
 
         $("<option>", {
-            name: "bool",
+            value: "bool",
             text: "Start Once",
         }).appendTo($type_select)
 
