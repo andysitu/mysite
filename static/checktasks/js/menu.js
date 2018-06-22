@@ -1,29 +1,24 @@
-var add_menu = {
-    status: false,
-    index: {
+var menu = {
+     index: {
         form_id: "add-form",
         name: "name",
         name_input_element: "name_input",
         description: "description",
         description_textarea: "description_text",
     },
-    submitter: function(e) {
-        e.preventDefault();
-        var $add_form = $("#" + add_menu.index.form_id)
-
-        function run_on_success() {
-            location.reload();
-        }
-
-        tasks_functions.add($add_form, run_on_success);
-    },
-    create_menu: function() {
+    create_menu: function(type) {
         this.status = true;
         var $menu_option_div = $( '#menu-option-div' );
 
         $menu_option_div.empty();
 
-        var $form = this.create_form();
+        var $form = $("<div>");
+        if (type == "add") {
+            $form = add_menu.create_form();
+        } else if (type == "edit") {
+            $form = edit_menu.create_form();
+        }
+
         $menu_option_div.append($form);
         $( '#menu-option-div' ).show();
         $('.overlay').show();
@@ -33,20 +28,9 @@ var add_menu = {
         $( '#menu-option-div' ).hide();
         $('.overlay').hide()
     },
-    create_form: function() {
-        var $form = $("<form>", {
-            action: add_url,
-            method: "POST",
-            id: this.index.form_id,
-            submit: this.submitter,
-        });
-
-        var type_select_id = "type-select";
-
-        var $div;
-
-        // Name Input
-        $div = $("<div class='form-group row'></div>");
+    create_name_$input: function() {
+         // Name Input
+        var $div = $("<div class='form-group row'></div>");
         $("<label>", {
             "class": "col-sm-2 col-form-label",
             "for": this.index.name_input_element,
@@ -57,10 +41,11 @@ var add_menu = {
             "class": "col-sm-6 form-control",
             name: "name",
         }).appendTo($div);
-
-        $form.append($div);
-
-        $div = $("<div class='form-group row'></div>");
+        return $div;
+    },
+    create_type_$select: function() {
+         var $div = $("<div class='form-group row'></div>"),
+             type_select_id = "type-select";
 
         $("<label>", {
             "class": "col-sm-2 col-form-label",
@@ -78,29 +63,79 @@ var add_menu = {
             value: "bool",
             text: "Start Once",
         }).appendTo($type_select)
-
-        $form.append($div);
-
-        // Submit Button
-        $("<button/>", {
+        return $div;
+    },
+    $create_submit_button: function() {
+         return $("<button/>", {
             "type": "submit",
             "class": "btn btn-primary",
             "text": "Submit",
-        }).appendTo($form);
-
-        $("<button/>", {
+        })
+    },
+    $create_cancel_button: function() {
+        return $("<button/>", {
             "class": "btn btn-secondary",
             text: "Cancel",
             click: function(e) {
                 e.preventDefault();
-                add_menu.close_menu();
+                menu.close_menu();
             },
-        }).appendTo($form);
+        });
+
+    }
+};
+
+var add_menu = {
+    status: false,
+    submitter: function(e) {
+        e.preventDefault();
+        var $add_form = $("#" + menu.index.form_id)
+
+        function run_on_success() {
+            location.reload();
+        }
+
+        tasks_functions.add($add_form, run_on_success);
+    },
+    create_form: function() {
+        var $form = $("<form>", {
+            action: add_url,
+            method: "POST",
+            id: menu.index.form_id,
+            submit: this.submitter,
+        });
+
+        var $name_div = menu.create_name_$input();
+        $form.append($name_div);
+
+        var $type_div = menu.create_type_$select();
+        $form.append($type_div);
+
+        var $submit_button = menu.$create_submit_button();
+        $submit_button.appendTo($form);
+
+        var $cancel_button = menu.$create_cancel_button;
+        $form.append($cancel_button);
 
         return $form;
     },
 };
 
 var edit_menu = {
-
+    status: false,
+    index: {
+        form_id: "edit-form",
+        name: "name",
+        name_input_element: "name_input",
+        description: "description",
+        description_textarea: "description_text",
+    },
+    create_menu: function() {
+        var $form = $("<form>", {
+            action: edit_url,
+            method: "POST",
+            id: this.index.form_id,
+            submit: this.submitter,
+        });
+    },
 };

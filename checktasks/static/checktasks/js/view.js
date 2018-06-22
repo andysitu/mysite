@@ -1,12 +1,10 @@
 $(document).ready(function(){
     $("#add-btn").click(function() {
-        add_menu.create_menu();
+        menu.create_menu("add");
     });
 
     $('.overlay').click(function() {
-        if (add_menu.status) {
-            add_menu.close_menu();
-        }
+        menu.close_menu();
 
     });
 

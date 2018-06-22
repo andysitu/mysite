@@ -97,3 +97,6 @@ def del_task_ajax(request):
     t.delete()
 
     return JsonResponse({})
+
+def edit_task_ajax(request):
+    return JsonResponse({})
