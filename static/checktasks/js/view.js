@@ -108,6 +108,7 @@ var viewer = {
                 id: "tr-" + task_row_num,
             }),
             $th = $("<th>", {
+                class: "task-name-th",
                 scope: "row",
             });
         $tr.append($th);
@@ -176,7 +177,7 @@ var viewer = {
             taskName = this._taskName_map[task_row_num];
 
         $("<button>", {
-            "class": "btn btn-link dropdown-toggle",
+            "class": "btn btn-link dropdown-toggle task-name-btn",
             type: "button",
             text: taskName,
             id: "taskButton-" + task_row_num,

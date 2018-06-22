@@ -123,19 +123,15 @@ var add_menu = {
 
 var edit_menu = {
     status: false,
-    index: {
-        form_id: "edit-form",
-        name: "name",
-        name_input_element: "name_input",
-        description: "description",
-        description_textarea: "description_text",
-    },
     create_menu: function() {
         var $form = $("<form>", {
             action: edit_url,
             method: "POST",
-            id: this.index.form_id,
+            id: menu.index.form_id,
             submit: this.submitter,
         });
     },
+    submitter: function() {
+        console.log("HI");
+    }
 };

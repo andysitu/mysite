@@ -10,3 +10,15 @@ td:not(.active):hover {
     background-color: papayawhip;
 }
 
+.task-name-btn {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+th.task-name-th {
+    padding-top: 1x;
+    padding-bottom: 1px;
+}
+
+td {
+}
