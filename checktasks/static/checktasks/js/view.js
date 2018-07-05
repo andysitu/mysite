@@ -5,7 +5,14 @@ $(document).ready(function(){
 
     $('.overlay').click(function() {
         menu.close_menu();
+    });
 
+    $("#next-month-but").click(function() {
+        viewer.next_month();
+    });
+
+    $("#prev-month-but").click(function() {
+        viewer.prev_month();
     });
 
     viewer.make_tasks_table();
@@ -15,12 +22,22 @@ var viewer = {
     _taskName_map: [],
     _date_map: [],
     set_date: function(year, month, date) {
-        this.month = month;
-        this.year = year;
-        this.date = date;
+        var d = new Date(year, month, date);
 
-        this.start_date = new Date(year, month, 1);
-        this.end_date = new Date(year, month+1, 0);
+        var adate = d.getDate(),
+            amonth = d.getMonth(),
+            ayear = d.getFullYear();
+
+        helper.set_date(ayear, amonth, adate);
+
+        this.month = amonth;
+        this.year = ayear;
+        this.date = adate;
+
+        console.log(ayear,amonth,adate);
+
+        this.start_date = new Date(ayear, amonth, 1);
+        this.end_date = new Date(ayear, amonth+1, 0);
     },
     year: null,
     month: null,
@@ -29,6 +46,16 @@ var viewer = {
     start_date: null,
     end_date: null,
 
+    next_month: function() {
+        this.set_date(this.year, this.month + 1, 1);
+        this.clear_table();
+        this.make_tasks_table();
+    },
+    prev_month: function() {
+        this.set_date(this.year, this.month -1, 1);
+        this.clear_table();
+        this.make_tasks_table();
+    },
     get_element_name: function(element, type, identifier) {
         // type - element name, id, or $element
         // identifier - additional string added, ie # added at end.
@@ -77,6 +104,10 @@ var viewer = {
          */
         this._taskName_map = [];
         this.get_element_name("tasks-div", "$").empty();
+    },
+
+    clear_table: function() {
+        $("#tasks-div").empty();
     },
 
     make_tasks_table: function() {
@@ -220,8 +251,6 @@ var viewer = {
     },
 
     add_dateRow: function() {
-        helper.setTodayDate();
-
         var dateJSON = helper.get_date(),
             $thead, $tr, $th,
             i;
@@ -241,6 +270,8 @@ var viewer = {
 
         var $table = this.get_element_name("table", "$");
         var $thead = $("<thead>");
+
+        $("#" + "month-disp").text(monthString)
 
         $tr = $("<tr>");
         $tr.append($("<th>", {

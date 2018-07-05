@@ -24,8 +24,14 @@
 {% endblock %}
 
 {% block content %}
+<span class="clickable fas fa-chevron-left" id="prev-month-but"></span>
+
+<span id="month-disp" style="display: inline-block;"></span>
+
+<span class="clickable fas fa-chevron-right" id="next-month-but"></span>
+
 <button type="button" class="btn btn-primary" id="add-btn">
-    <i class="fa fa-plus" aria-hidden="true"></i> Add
+    <i class="fa fa-plus" aria-hidden="true"></i>
 </button>
 
 <div id="tasks-div"></div>

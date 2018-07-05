@@ -22,3 +22,7 @@ th.task-name-th {
 
 td {
 }
+
+.clickable {
+    cursor: pointer;
+}
