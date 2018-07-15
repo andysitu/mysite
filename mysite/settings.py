@@ -26,7 +26,7 @@ SECRET_KEY = 'm4z(mi172wbnpk6y!5tqm(u&anc(a7$%hz4rm189syfp*(-_)d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = django_login_file.debug_status
 
-ALLOWED_HOSTS = [ '127.0.0.1', '192.168.1.234', 'rarafon.com', '104.131.152.209' ]
+ALLOWED_HOSTS = [ '127.0.0.1', '192.168.1.233', 'rarafon.com', '104.131.152.209' ]
 
 
 # Application definition
