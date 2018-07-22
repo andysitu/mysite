@@ -1,0 +1,69 @@
+a:hover {
+    text-decoration: none;
+}
+
+.right-sidebar {
+    position: fixed;
+    top: 30px;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.table-fit{
+    width: auto;
+}
+
+li.sidebar-li {
+    display: block;
+}
+
+li.sidebar-li > a {
+    display: block;
+    color: #99979c;
+    padding: .125rem 1.5rem;
+}
+
+li.sidebar-li > a:hover{
+    color: blue;
+    text-decoration: none;
+}
+
+ul.section-nav {
+    padding-left: 1rem;
+}
+
+#display-msg-div {
+    position: absolute;
+    top: 5%;
+    left: 75%;
+    height: 90%;
+    width: 24%;
+    z-index: 900;
+    overflow-y: auto;
+}
+
+#display-msg-text {
+    white-space: normal;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+#data-table > thead  {
+    cursor: pointer;
+ }
+
+.multiple-rcv-div {
+    display: none;
+}
+
+.mousePoint {
+    cursor: pointer;
+}
+
+td {
+    white-space:pre;
+}

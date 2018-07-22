@@ -1,0 +1,100 @@
+{% extends 'warehouse_map/warehouse_map_base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+
+{% load static %}
+{% csrf_token %}
+
+<script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+
+<script type="text/javascript">
+    var csrftoken = jQuery('[name=csrfmiddlewaretoken]').val();
+
+    var request_grid_url = "{% url 'warehouse_map:request_grid_map_ajax' %}",
+        date_ajax_url = "{% url 'warehouse_map:request_date_ajax' %}",
+        map_search_info_url = "{% url 'warehouse_map:request_map_search_info' %}",
+        date_del_url = "{% url 'warehouse_map:date_by_date' %}";
+</script>
+
+<script type="text/javascript" src="{% static 'warehouse_map/js/page_functions.js' %}"></script>
+<script type="text/javascript" src="{% static 'warehouse_map/js/color_map.js' %}"></script>
+<script type="text/javascript" src="{% static 'warehouse_map/js/map.js' %}"></script>
+<script type="text/javascript" src="{% static 'warehouse_map/js/map_functions.js' %}"></script>
+<script type="text/javascript" src="{% static 'warehouse_map/js/map_ajax.js' %}"></script>
+
+<canvas id="map_canvas">{% trans "Your internet browser doesn't support HTML canvas. Please use another one." %}</canvas>
+{% endblock %}
+
+{% block outside_content %}
+    <div class="container collapse show" id="display-msg-div">
+        <div id="display-msg-text"></div>
+    </div>
+{% endblock %}
+
+{% block settings %}
+<li>
+    <button class="navbar-toggler" id="menu-settingButton" type="button">
+        <i class="fa fa-cog" aria-hidden="true"></i>
+    </button>
+</li>
+<hr>
+
+<form action="" method="get">
+    <div class="form-group">
+        <label for="data-type-select">{% trans "Data Type" %}</label>
+        <select class="form-control" id="data-type-select"></select>
+    </div>
+
+    <div class="form-group">
+        <label for="level-input">{% trans "Floor Level" %}</label>
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button type="button" id="minus-level" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                </button>
+            </span>
+            <select class="form-control" id="level-select"></select>
+            <span class="input-group-btn">
+                <button type="button" id="plus-level" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="date-select">{% trans "Date" %}</label>
+        <select class="form-control" id="date-select"></select>
+    </div>
+
+    <div id="side-menu-additions"></div>
+
+    <button type="submit" id="map-submit-button" class="btn btn-primary">Search</button>
+</form>
+
+<ul class="menubar-side" id="menu-setting">
+    <li class="menubar-side-item">
+        <a class="side-link" href="#display-msg-div" data-toggle="collapse" aria-expanded="false" aria-controls="display-msg-div">
+            {% trans "Toggle msg box" %}
+        </a>
+    </li>
+    <li class="menubar-side-item">
+        <a class="side-link" href="{% url 'warehouse_map:reset_db' %}">{% trans "Reset Database" %}</a>
+    </li>
+    <li class="menubar-side-item">
+        <a class="side-link" href="{% url 'warehouse_map:reset_db_true' %}">{% trans "Reset Database & Locations" %}</a>
+    </li>
+    <li class="menubar-side-item">
+        <a class="side-link" href="{% url 'warehouse_map:reset_grid_map' %}">{% trans "Reset Grid (Image) Map" %}</a>
+    </li>
+    <li class="menubar-side-item">
+        <a id="date-del-link" class="side-link" href="">{% trans "Delete By Date" %}</a>
+    </li>
+</ul>
+
+<div class="menubar-side" id="menu-screen-container"></div>
+
+<div class="overlay"></div>
+{% endblock %}

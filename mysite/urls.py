@@ -17,6 +17,9 @@ from django.urls import path, include
 from django.contrib import admin
 from django.shortcuts import redirect
 
+from django.views.i18n import JavaScriptCatalog
+
+
 from . import views
 
 app_name = "mysite"
@@ -27,7 +30,15 @@ urlpatterns = [
     path('budget_data/', include('budget_data.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', views.index, name="index"),
-    path('index/', views.index,)
+    path('index/', views.index,),
+
+    path('warehouse_viewer/', include('warehouse_viewer.urls')),
+    path('warehouse_map/', include('warehouse_map.urls')),
+    path('rcv_list/', include('rcv_list.urls')),
+
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    path('i18n/', include('django.conf.urls.i18n')),
+
 ]
 
 urlpatterns += [
