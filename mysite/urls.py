@@ -32,6 +32,7 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('index/', views.index,),
 
+    path('warehouse_data/', include('warehouse_data.urls')),
     path('warehouse_viewer/', include('warehouse_viewer.urls')),
     path('warehouse_map/', include('warehouse_map.urls')),
     path('rcv_list/', include('rcv_list.urls')),
