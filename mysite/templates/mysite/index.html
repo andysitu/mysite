@@ -1,4 +1,4 @@
-{% extends 'base/base_generic.html' %}
+{% extends 'tbase/base.html' %}
 
 {% load static %}
 
@@ -8,7 +8,7 @@
     <li><a href="{% url 'budget:index' %}">Budget</a></li>
     <li><a href="{% url 'checktasks:main' %}">CheckTasks</a></li>
     <li><a href="{% url 'rcv_list:index' %}">RCV List</a></li>
-    <li><a href="{% url 'warehouse_viewer:index' %}">CheckTasks</a></li>
+    <li><a href="{% url 'warehouse_viewer:index' %}">Warehouse Viewer</a></li>
 </ul>
 
 {% endblock %}

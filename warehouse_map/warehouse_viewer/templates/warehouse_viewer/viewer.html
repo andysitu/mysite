@@ -9,6 +9,7 @@
 <script type="text/javascript" src="{% static 'p_site/js/Chart.bundle.min.js' %}"></script>
 
 <script type="text/javascript" src="{% static 'warehouse_viewer/js/viewer/side_menu.js' %}"></script>
+<script type="text/javascript" src="{% static 'warehouse_viewer/js/viewer/page_functions.js' %}"></script>
 <script type="text/javascript" src="{% static 'warehouse_viewer/js/viewer/viewer_processor.js' %}"></script>
 <script type="text/javascript" src="{% static 'warehouse_viewer/js/viewer/viewer.js' %}"></script>
 <script type="text/javascript" src="{% static 'warehouse_viewer/js/viewer/load_viewer.js' %}"></script>
@@ -43,12 +44,15 @@
     </button>
 </form>
 
-<ul class="menubar-side" id="menu-setting">
-    <li class="menubar-side-item">
-        <a class="side-link" href="#display-msg-div" data-toggle="collapse" aria-expanded="false" aria-controls="display-msg-div">
-            {% trans "Toggle msg box" %}
-        </a>
-    </li>
+{% endblock %}
+
+{% block viewer_navbar_links %}
+{% endblock %}
+
+{% block content %}
+<div id="display-container"></div>
+
+<ul class="menubar-side sidebar-nav" id="menu-setting">
     <li class="menubar-side-item">
         <a class="side-link" href="{% url 'warehouse_map:reset_db' %}">{% trans "Reset Database" %}</a>
     </li>
@@ -63,11 +67,5 @@
     </li>
 </ul>
 
-{% endblock %}
-
-{% block viewer_navbar_links %}
-{% endblock %}
-
-{% block content %}
-<div id="display-container"></div>
+<div class="overlay"></div>
 {% endblock %}

@@ -65,6 +65,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'mysite', 'templates'),
+            os.path.join(BASE_DIR, 'psite_base', 'templates'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -136,6 +137,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'psite_base', 'static'),
     # os.path.join(BASE_DIR, "static"),
 ]
 

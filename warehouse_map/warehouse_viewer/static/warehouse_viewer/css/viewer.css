@@ -118,5 +118,9 @@ td {
     cursor: pointer;
     background-color: #ccc;
     opacity: 0.6;
-    z-index: 1040;
+    z-index: 1010;
+}
+
+button:hover {
+    cursor: pointer;
 }
