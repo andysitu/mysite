@@ -6,7 +6,7 @@ var menu = {
         description: "description",
         description_textarea: "description_text",
     },
-    create_menu: function(type) {
+    create_menu: function(type, data_obj) {
         this.status = true;
         var $menu_option_div = $( '#menu-option-div' );
 
@@ -16,7 +16,7 @@ var menu = {
         if (type == "add") {
             $form = add_menu.create_form();
         } else if (type == "edit") {
-            $form = edit_menu.create_form();
+            $form = edit_menu.create_form(data_obj.taskName);
         }
 
         $menu_option_div.append($form);
@@ -123,13 +123,27 @@ var add_menu = {
 
 var edit_menu = {
     status: false,
-    create_menu: function() {
+    create_form: function() {
         var $form = $("<form>", {
             action: edit_url,
             method: "POST",
             id: menu.index.form_id,
             submit: this.submitter,
         });
+
+        var $name_div = menu.create_name_$input();
+        $form.append($name_div);
+
+        // var $type_div = menu.create_type_$select();
+        // $form.append($type_div);
+
+        var $submit_button = menu.$create_submit_button();
+        $submit_button.appendTo($form);
+
+        var $cancel_button = menu.$create_cancel_button;
+        $form.append($cancel_button);
+
+        return $form;
     },
     submitter: function() {
         console.log("HI");

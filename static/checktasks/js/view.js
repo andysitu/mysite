@@ -238,7 +238,7 @@ var viewer = {
         }).appendTo($dropdown_div);
 
         function edit_task(e) {
-            console.log("EDIT");
+            menu.create_menu("edit", {taskName,});
         }
 
         $("<a>", {

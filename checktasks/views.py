@@ -99,4 +99,10 @@ def del_task_ajax(request):
     return JsonResponse({})
 
 def edit_task_ajax(request):
+    user = request.user
+    if request.method == "POST":
+        new_name = request.POST.get("name")
+
+        return JsonResponse({"name": name})
+
     return JsonResponse({})

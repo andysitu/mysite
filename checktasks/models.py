@@ -8,6 +8,10 @@ class Task(models.Model):
     name = models.CharField(max_length=30)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
+    def edit_name(self, new_name):
+        self.name = new_name
+        self.save()
+
     def click(self, year, month, day):
         d = datetime.date(year, month, day)
         if self.daterecord_set.filter(date=d).exists():
