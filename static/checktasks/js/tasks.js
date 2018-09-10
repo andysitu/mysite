@@ -27,6 +27,23 @@ var tasks_functions = {
             }
         });
     },
+    edit: function($edit_form, run_on_success) {
+        tasks_functions.csrf_it();
+
+        console.log($edit_form.serialize());
+        $.ajax({
+            type: "POST",
+            url: $edit_form.attr("action"),
+            data: $edit_form.serialize(),
+            success: function(data) {
+                console.log(data);
+                if (typeof run_on_success == "function") {
+                    run_on_success(data);
+                }``
+            }
+        });
+    },
+
     get_tasks: function(callback_function, start_date, end_date) {
         tasks_functions.csrf_it();
         $.ajax({
@@ -41,7 +58,6 @@ var tasks_functions = {
                 "end_day": end_date.getDate(),
             },
             success: function(data) {
-                console.log("Got TASKS:", data);
                 callback_function(data, start_date, end_date);
             }
         });

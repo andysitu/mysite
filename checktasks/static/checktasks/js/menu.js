@@ -123,10 +123,11 @@ var add_menu = {
 
 var edit_menu = {
     status: false,
-    create_form: function() {
+    create_form: function(taskName) {
         var $form = $("<form>", {
             action: edit_url,
             method: "POST",
+            data: {taskName,},
             id: menu.index.form_id,
             submit: this.submitter,
         });
@@ -143,9 +144,23 @@ var edit_menu = {
         var $cancel_button = menu.$create_cancel_button;
         $form.append($cancel_button);
 
+        var el = document.createElement("input")
+        el.innerHTML = '<input type="hidden" value="' + taskName + '" name="taskName">'
+        $form.append(el.firstChild)
+
         return $form;
     },
-    submitter: function() {
-        console.log("HI");
+    submitter: function(e) {
+        e.preventDefault();
+        console.log("edit");
+
+        var $edit_form = $("#" + menu.index.form_id)
+
+        function run_on_success(data) {
+            // menu.close_menu();
+            location.reload();
+        }
+
+        tasks_functions.edit($edit_form, run_on_success);
     }
 };

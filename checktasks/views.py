@@ -101,8 +101,14 @@ def del_task_ajax(request):
 def edit_task_ajax(request):
     user = request.user
     if request.method == "POST":
+        taskName = request.POST["taskName"]
+
         new_name = request.POST.get("name")
 
-        return JsonResponse({"name": name})
+        task = Task.objects.get(name=taskName)
+        task.name = new_name
+        task.save()
+
+        return JsonResponse({"name": new_name, "old_name": task.name,})
 
     return JsonResponse({})
