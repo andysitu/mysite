@@ -3,6 +3,19 @@ $(document).ready(function(){
         menu.create_menu("add");
     });
 
+    document.addEventListener('keydown', (event) => {
+        var k = event.key;
+        switch(k) {
+            case "ArrowRight":
+                viewer.next_month();
+                break;
+            case "ArrowLeft":
+                viewer.prev_month();
+                break;
+        }
+
+    })
+
     $('.overlay').click(function() {
         menu.close_menu();
     });
@@ -17,6 +30,8 @@ $(document).ready(function(){
 
     viewer.make_tasks_table();
 });
+
+
 
 var viewer = {
     _taskName_map: [],
