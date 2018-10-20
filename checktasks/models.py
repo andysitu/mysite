@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
+# Normal Task; Done once
 class Task(models.Model):
     type = "bool"
     name = models.CharField(max_length=30)
@@ -50,6 +51,9 @@ class Task(models.Model):
 
         return task_dic
 
+class Time_Task(Task):
+    type = "time"
+    total_minutes = models.IntegerField()
 
 class DateRecord(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, blank=True, null=True)
@@ -58,3 +62,7 @@ class DateRecord(models.Model):
     def __str__(self):
         d = self.date
         return str(d.year) + "_" + str(d.month) + "_" + str(d.day)
+
+class TimeRecord(DateRecord):
+    time = models.IntegerField(default=0)
+    tasks = models.ForeignKey(Time_Task, on_delete=models.CASCADE, blank=True, null=True)
