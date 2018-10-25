@@ -61,12 +61,12 @@ var menu = {
 
         $("<option>", {
             value: "bool",
-            text: "Done Once",
+            text: "Tasks Done Once",
         }).appendTo($type_select)
 
         $("<option>", {
-            value: "time",
-            text: "Timed",
+            value: "multiple",
+            text: "Counted Tasks",
         }).appendTo($type_select)
 
         return $div;
@@ -74,7 +74,7 @@ var menu = {
     $create_submit_button: function() {
          return $("<button/>", {
             "type": "submit",
-            "class": "btn btn-primary",
+            "class": "btn btn-primary",Q
             "text": "Submit",
         })
     },

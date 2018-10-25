@@ -51,9 +51,7 @@ class Task(models.Model):
 
         return task_dic
 
-class Time_Task(Task):
-    type = "time"
-    total_minutes = models.IntegerField()
+
 
 class DateRecord(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, blank=True, null=True)
@@ -63,6 +61,10 @@ class DateRecord(models.Model):
         d = self.date
         return str(d.year) + "_" + str(d.month) + "_" + str(d.day)
 
-class TimeRecord(DateRecord):
-    time = models.IntegerField(default=0)
-    tasks = models.ForeignKey(Time_Task, on_delete=models.CASCADE, blank=True, null=True)
+# class Time_Task(Task):
+#     type = "time"
+#     total_minutes = models.IntegerField()
+
+# class TimeRecord(DateRecord):
+#     time = models.IntegerField(default=0)
+#     tasks = models.ForeignKey(Time_Task, on_delete=models.CASCADE, blank=True, null=True)

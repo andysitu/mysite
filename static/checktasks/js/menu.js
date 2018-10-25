@@ -61,12 +61,12 @@ var menu = {
 
         $("<option>", {
             value: "bool",
-            text: "Done Once",
+            text: "Tasks Done Once",
         }).appendTo($type_select)
 
         $("<option>", {
             value: "time",
-            text: "Timed",
+            text: "Counted Tasks",
         }).appendTo($type_select)
 
         return $div;
